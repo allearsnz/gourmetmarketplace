@@ -58,7 +58,8 @@ ul{list-style:none}
 .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
 .nav-inner{max-width:1280px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:32px}
 .brand{display:flex;align-items:center;gap:10px}
-.brand-mark{width:38px;height:38px;display:block;flex-shrink:0;object-fit:contain}
+.brand-mark{width:44px;height:44px;display:block;flex-shrink:0;object-fit:contain}
+.footer-brand .brand-mark{width:48px;height:48px}
 .brand-word{font-family:var(--sans);font-size:16px;font-weight:600;color:var(--ink);letter-spacing:-.005em}
 .brand-word i{color:var(--orange);font-style:italic;font-weight:500}
 .nav-links{display:flex;align-items:center;gap:28px}
@@ -143,12 +144,22 @@ h2.section-title.on-dark{color:#fff}
 .add-to-cart-btn:hover{background:var(--green);color:#fff}
 
 /* Categories */
-.categories{padding:64px 0;background:var(--bg-soft)}
-.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.cat-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:24px;text-align:center;transition:border-color .15s ease;cursor:pointer}
-.cat-card:hover{border-color:var(--green)}
-.cat-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
-.cat-count{font-size:13px;color:var(--ink-3)}
+.categories{padding:88px 0;background:var(--bg-soft)}
+.cat-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:flex-start}
+.cat-intro h2{margin-bottom:16px}
+.cat-intro p{font-size:15px;color:var(--ink-2);line-height:1.7;max-width:380px}
+.cat-list{border-top:1px solid var(--line)}
+.cat-row{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline;padding:22px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:padding-left .2s ease,background-color .15s ease}
+.cat-row:hover{padding-left:14px;background:rgba(255,255,255,.5)}
+.cat-row:hover .cat-name{color:var(--green)}
+.cat-row:hover .cat-arrow{opacity:1;transform:translateX(0)}
+.cat-num{font-family:var(--serif);font-size:14px;font-weight:400;color:var(--ink-3);font-style:italic;width:32px}
+.cat-body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cat-name{font-family:var(--serif);font-size:26px;font-weight:500;color:var(--ink);line-height:1.15;letter-spacing:-.005em;transition:color .15s ease}
+.cat-blurb{font-size:14px;color:var(--ink-2);line-height:1.5}
+.cat-meta{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--ink-3);white-space:nowrap}
+.cat-meta strong{color:var(--ink-2);font-weight:600}
+.cat-arrow{font-size:18px;color:var(--green);opacity:0;transform:translateX(-8px);transition:opacity .15s ease,transform .15s ease}
 
 /* Editorial green band */
 .edit-band{padding:80px 0;background:var(--green);color:#fff}
@@ -167,7 +178,7 @@ h2.section-title.on-dark{color:#fff}
 .blog-card:hover{border-bottom-color:var(--green)}
 .blog-card:hover .blog-title{color:var(--green)}
 .blog-img{aspect-ratio:7/4;background-size:cover;background-position:center;border-radius:4px;margin-bottom:16px}
-.blog-tag{font-size:13px;color:var(--orange);font-weight:500;margin-bottom:8px;font-style:italic}
+.blog-tag{font-size:13px;color:var(--orange);font-weight:500;margin-bottom:8px}
 .blog-title{font-size:18px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:8px;transition:color .15s ease}
 .blog-excerpt{font-size:14px;color:var(--ink-2);line-height:1.55;margin-bottom:14px}
 .blog-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -249,9 +260,6 @@ h2.section-title.on-dark{color:#fff}
 .about-text-block .inner{max-width:720px;margin:0 auto}
 .about-text-block h2{font-family:var(--serif);font-size:36px;font-weight:500;letter-spacing:-.01em;margin-bottom:24px}
 .about-text-block p{font-size:15px;line-height:1.8;color:var(--ink-2);margin-bottom:18px}
-.about-links{display:flex;justify-content:center;gap:32px;padding:40px 0;flex-wrap:wrap}
-.about-links a{font-size:14px;color:var(--green);font-weight:500;border-bottom:1px solid transparent;transition:border-color .15s ease}
-.about-links a:hover{border-bottom-color:var(--green)}
 
 /* Articles page */
 .articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;padding:40px 0 80px}
@@ -262,7 +270,7 @@ h2.section-title.on-dark{color:#fff}
 .article-back:hover{border-bottom-color:var(--ink-3);color:var(--ink-2)}
 .article-hero{aspect-ratio:21/9;max-height:420px;border-radius:4px;background-size:cover;background-position:center;margin-bottom:32px}
 .article-meta-row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
-.article-tag{font-size:14px;color:var(--orange);font-weight:500;font-style:italic}
+.article-tag{font-size:14px;color:var(--orange);font-weight:500}
 .article-date{font-size:13px;color:var(--ink-3)}
 .article-page h1{font-family:var(--serif);font-size:48px;font-weight:500;line-height:1.15;letter-spacing:-.012em;max-width:840px;margin-bottom:24px}
 .article-body{max-width:720px;font-size:16px;line-height:1.8;color:var(--ink-2)}
@@ -370,7 +378,7 @@ h2.section-title.on-dark{color:#fff}
   .nav-search{width:160px}
   .hero h1{font-size:48px}
   h2.section-title{font-size:34px}
-  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .cat-layout{grid-template-columns:1fr;gap:40px}
   .shop-grid{grid-template-columns:repeat(3,1fr)}
   .blog-grid,.articles-grid{grid-template-columns:repeat(2,1fr)}
   .product-grid,.about-grid,.cart-grid,.edit-band-grid,.connect-grid{grid-template-columns:1fr;gap:40px}
@@ -391,8 +399,11 @@ h2.section-title.on-dark{color:#fff}
   .hero h1{font-size:38px}
   .hero p.lead{font-size:15px}
   h2.section-title{font-size:28px}
-  .cat-grid,.shop-grid{grid-template-columns:repeat(2,1fr)}
+  .shop-grid{grid-template-columns:repeat(2,1fr)}
   .blog-grid,.articles-grid{grid-template-columns:1fr}
+  .cat-row{grid-template-columns:auto 1fr;gap:14px}
+  .cat-meta{grid-column:2;justify-self:start;font-size:12px}
+  .cat-name{font-size:22px}
   .form-row{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .page-banner h1{font-size:36px}
@@ -402,7 +413,7 @@ h2.section-title.on-dark{color:#fff}
   .modal h2{font-size:28px}
 }
 @media (max-width:480px){
-  .cat-grid,.shop-grid{grid-template-columns:1fr}
+  .shop-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
   .scroller .product-card{flex:0 0 220px}
 }
@@ -419,9 +430,8 @@ h2.section-title.on-dark{color:#fff}
 <!-- Nav -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#home" class="brand" onclick="navigate('home',event)">
-      <img src="logo.png" alt="" class="brand-mark" width="38" height="38">
-      <span class="brand-word">Gourmet <i>Marketplace</i></span>
+    <a href="#home" class="brand" aria-label="Gourmet Marketplace home" onclick="navigate('home',event)">
+      <img src="logo.png" alt="Gourmet Marketplace" class="brand-mark" width="44" height="44">
     </a>
     <div class="nav-links">
       <a href="#home" class="nav-link" data-route="home" onclick="navigate('home',event)">Home</a>
@@ -477,9 +487,13 @@ h2.section-title.on-dark{color:#fff}
 
   <section class="categories">
     <div class="container">
-      <h2 class="section-title">Shop by Category</h2>
-      <p class="section-sub">Six tightly edited categories. Each product is here because it earns its shelf space.</p>
-      <div class="cat-grid" id="catGrid"></div>
+      <div class="cat-layout">
+        <div class="cat-intro">
+          <h2 class="section-title">Shop by category</h2>
+          <p>Six departments, 38 products. Every item earns its shelf space because someone here actually uses it. Pick a department, or browse the full shop.</p>
+        </div>
+        <div class="cat-list" id="catGrid"></div>
+      </div>
     </div>
   </section>
 
@@ -602,14 +616,6 @@ h2.section-title.on-dark{color:#fff}
       </div>
     </div>
   </section>
-  <div class="container">
-    <div class="about-links">
-      <a href="#home" onclick="navigate('home',event)">Home</a>
-      <a href="#shop" onclick="navigate('shop',event)">Shop</a>
-      <a href="#articles" onclick="navigate('articles',event)">Articles</a>
-      <a href="#connect" onclick="navigate('connect',event)">Connect</a>
-    </div>
-  </div>
 </div>
 
 <!-- ============ ARTICLES ============ -->
@@ -1126,14 +1132,36 @@ function renderHome(){
   const giftcards = PRODUCTS.filter(p=>p.category==="giftcard");
   document.getElementById('giftcardScroller').innerHTML = giftcards.map(productCard).join('');
 
-  const counts = CATEGORIES.map(c=>({...c, count: PRODUCTS.filter(p=>p.category===c.key).length}));
-  const catCardsHTML = counts.map(c=>`
-    <div class="cat-card" onclick="navigate('shop',event);setShopCategory('${c.key}')">
-      <div class="cat-name">${c.name}</div>
-      <div class="cat-count">${c.count} products</div>
+  const blurbs = {
+    "hot-sauce":"Trejo's full lineup, mild jalapeno through scorpion-pepper extreme. Plus the hot honey.",
+    "energy":"Alani Nu, 3D, MULE. Zero sugar, real flavors, sold by the case.",
+    "coffee-tea":"Bulk-bag specialty coffee, loose-leaf tea, and the Art of Tea reading list.",
+    "health":"Algae-derived omega supplements, protein muffins, RTD shakes, nootropic gummies.",
+    "pantry":"Bulk popcorn, organic avocado oil, Korean seaweed soup concentrate.",
+    "giftcard":"Kroger, Safeway, Albertsons, Instacart, Meijer, Ralphs, plus the Marketplace card."
+  };
+  const cats = CATEGORIES.map(c=>{
+    const items = PRODUCTS.filter(p=>p.category===c.key);
+    const prices = items.map(p=>p.price ?? p.priceFrom);
+    const fromPrice = prices.length ? Math.min(...prices) : 0;
+    return {...c, count:items.length, fromPrice, blurb:blurbs[c.key]||""};
+  });
+  const fmt = n => n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`;
+  const catRowsHTML = cats.map((c,i)=>`
+    <div class="cat-row" onclick="navigate('shop',event);setShopCategory('${c.key}')">
+      <div class="cat-num">0${i+1}</div>
+      <div class="cat-body">
+        <div class="cat-name">${c.name}</div>
+        <div class="cat-blurb">${c.blurb}</div>
+      </div>
+      <div class="cat-meta">
+        <span><strong>${c.count}</strong> ${c.count===1?'item':'items'}</span>
+        <span>from ${fmt(c.fromPrice)}</span>
+        <span class="cat-arrow">→</span>
+      </div>
     </div>
   `).join('');
-  document.getElementById('catGrid').innerHTML = catCardsHTML;
+  document.getElementById('catGrid').innerHTML = catRowsHTML;
 
   const blogCards = ARTICLES.slice(0,3).map(articleCard).join('');
   document.getElementById('blogPreview').innerHTML = blogCards;
