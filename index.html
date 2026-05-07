@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<!--
+GOURMET MARKETPLACE — SHOPIFY DEV HANDOFF
+Rebuild this prototype 1:1 in Shopify using Dawn as the base theme. No Divi, Salient, or Elementor.
+Product images: currently loading from gourmetmarketplace.co CDN — re-upload all to Shopify CDN before launch.
+Hero and editorial images: currently Unsplash — replace with original photography or licensed stock.
+Cart/checkout: replace "Place Order" modal with Shopify native checkout.
+Slack webhook: Shopify Admin > Settings > Notifications > Webhooks > Order Created.
+Company: Gourmet Marketplace LLC · 1422 S Tryon Street Suite 300 Charlotte NC 28203 · info@gourmetmarketplace.co · 1(347)986-1258
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gourmet Marketplace – Fresh Finds. Global Flavors.</title>
+<meta name="description" content="Hand-selected ingredients, specialty goods, and chef-driven staples — shipped from Charlotte, NC. Hot sauces, coffee, tea, energy drinks, supplements, and grocery gift cards.">
+<link rel="canonical" href="https://gourmetmarketplace.co/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF7;
+  --bg-soft:#F2F1EA;
+  --green:#1A4731;
+  --green-deep:#143524;
+  --green-pale:#E8EFE7;
+  --green-mid:#B8D0BB;
+  --orange:#E8621A;
+  --ink:#1B1A17;
+  --ink-2:#4A4A45;
+  --ink-3:#7A7A72;
+  --line:#E5E3DA;
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"DM Sans",system-ui,sans-serif;
+  --shadow-sm:0 1px 2px rgba(20,53,36,0.05),0 1px 3px rgba(20,53,36,0.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
+ul{list-style:none}
+
+/* Announcement banner */
+.announce{background:var(--green);color:#fff;font-size:13px;text-align:center;padding:0 24px;height:44px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:max-height .25s ease,padding .25s ease;max-height:44px}
+.announce.dismissed{max-height:0;padding:0}
+.announce span{font-weight:400;letter-spacing:.01em}
+.announce strong{font-weight:600}
+.announce-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#fff;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:18px;opacity:.7;transition:opacity .15s ease}
+.announce-close:hover{opacity:1}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:32px;height:32px;background:var(--green);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-style:italic;font-weight:700;font-size:18px}
+.brand-word{font-family:var(--sans);font-size:16px;font-weight:600;color:var(--ink);letter-spacing:-.005em}
+.brand-word i{color:var(--orange);font-style:italic;font-weight:500}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-link{font-size:14px;font-weight:500;color:var(--ink-2);padding:22px 0;border-bottom:2px solid transparent;transition:color .15s ease,border-color .15s ease}
+.nav-link:hover{color:var(--green)}
+.nav-link.active{color:var(--green);border-bottom-color:var(--orange)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-toggle{display:none;width:38px;height:38px;border-radius:4px;align-items:center;justify-content:center;color:var(--ink);transition:background .15s ease}
+.nav-toggle:hover{background:var(--bg-soft)}
+.nav-toggle svg{width:20px;height:20px}
+.nav-toggle .icon-close{display:none}
+body.menu-open .nav-toggle .icon-open{display:none}
+body.menu-open .nav-toggle .icon-close{display:block}
+.nav-search{position:relative;display:flex;align-items:center;background:var(--bg-soft);border:1px solid var(--line);border-radius:4px;padding:0 12px;height:38px;width:200px;transition:width .2s ease,border-color .15s ease}
+.nav-search:focus-within{width:260px;border-color:var(--green)}
+.nav-search svg{width:14px;height:14px;color:var(--ink-3);flex-shrink:0}
+.nav-search input{border:none;background:transparent;outline:none;width:100%;padding:0 0 0 8px;font-size:13px;color:var(--ink)}
+.cart-btn{position:relative;width:38px;height:38px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .15s ease}
+.cart-btn:hover{background:var(--bg-soft)}
+.cart-btn svg{width:18px;height:18px}
+.cart-badge{position:absolute;top:-2px;right:-2px;background:var(--orange);color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center;line-height:1}
+
+/* Page containers */
+.page{display:none;animation:none}
+.page.active{display:block}
+main{min-height:60vh}
+
+/* Generic */
+.container{max-width:1280px;margin:0 auto;padding:0 32px}
+.section-label{display:inline-flex;align-items:center;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);border-left:3px solid var(--orange);padding-left:8px;margin-bottom:14px}
+.section-label.on-dark{color:rgba(255,255,255,.65)}
+h1,h2,h3{line-height:1.15;color:var(--ink)}
+h2.section-title{font-family:var(--serif);font-size:42px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px}
+h2.section-title.on-dark{color:#fff}
+.section-sub{font-size:15px;color:var(--ink-2);max-width:640px;margin-bottom:36px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;padding:12px 24px;border-radius:4px;transition:background .15s ease,color .15s ease,border-color .15s ease;border:1px solid transparent;cursor:pointer;letter-spacing:.005em}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-deep)}
+.btn-outline-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.btn-outline-light:hover{background:rgba(255,255,255,.1)}
+.btn-outline-dark{background:transparent;color:var(--green);border-color:var(--green)}
+.btn-outline-dark:hover{background:var(--green-pale)}
+.btn-soft{background:var(--green-pale);color:var(--green);border-radius:4px}
+.btn-soft:hover{background:var(--green);color:#fff}
+.btn-block{width:100%}
+.btn-orange{background:var(--orange);color:#fff}
+.btn-orange:hover{background:#cc511a}
+
+/* HOME — hero */
+.hero{position:relative;min-height:580px;display:flex;align-items:center;color:#fff;overflow:hidden;background:#1a4731}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-image:url(https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&h=700&fit=crop&q=80)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:rgba(26,71,49,.55)}
+.hero-inner{position:relative;max-width:680px;padding:80px 32px}
+.hero .breadcrumb{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:20px}
+.hero h1{font-family:var(--serif);font-size:64px;font-weight:500;line-height:1.05;letter-spacing:-.015em;margin-bottom:20px}
+.hero p.lead{font-size:17px;color:rgba(255,255,255,.82);max-width:560px;line-height:1.55;margin-bottom:32px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+
+/* Featured strip */
+.featured{padding:64px 0;background:var(--bg)}
+.featured-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;gap:32px;flex-wrap:wrap}
+.featured-head-left{flex:1;min-width:280px}
+.featured-link{font-size:14px;color:var(--orange);font-weight:500;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s ease}
+.featured-link:hover{border-bottom-color:var(--orange)}
+.scroller{display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding-bottom:8px;scroll-snap-type:x mandatory;margin:0 -32px;padding-left:32px;padding-right:32px}
+.scroller::-webkit-scrollbar{height:6px}
+.scroller::-webkit-scrollbar-track{background:transparent}
+.scroller::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+.scroller .product-card{flex:0 0 240px;scroll-snap-align:start}
+
+/* Product card */
+.product-card{background:#fff;border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden;transition:border-color .15s ease;cursor:pointer}
+.product-card:hover{border-color:var(--green)}
+.product-card-img{aspect-ratio:1/1;background:var(--bg-soft);display:block;overflow:hidden}
+.product-card-img img{width:100%;height:100%;object-fit:cover;background:#fff}
+.product-card-body{padding:14px 14px 14px;display:flex;flex-direction:column;gap:6px}
+.product-card-cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.product-card-name{font-size:14px;font-weight:600;color:var(--ink);line-height:1.35;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-card-price{font-size:16px;font-weight:700;color:var(--green);margin-top:auto}
+.product-card-foot{padding:0 14px 14px}
+.add-to-cart-btn{width:100%;background:var(--green-pale);color:var(--green);font-size:13px;font-weight:600;padding:9px;border-radius:4px;transition:background .15s ease,color .15s ease}
+.add-to-cart-btn:hover{background:var(--green);color:#fff}
+
+/* Categories */
+.categories{padding:64px 0;background:var(--bg-soft)}
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.cat-card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:24px;text-align:center;transition:border-color .15s ease;cursor:pointer}
+.cat-card:hover{border-color:var(--green)}
+.cat-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.cat-count{font-size:13px;color:var(--ink-3)}
+
+/* Editorial green band */
+.edit-band{padding:80px 0;background:var(--green);color:#fff}
+.edit-band-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.edit-band h2{font-family:var(--serif);font-size:48px;font-weight:500;line-height:1.1;letter-spacing:-.015em;margin-bottom:18px;color:#fff}
+.edit-band p{font-size:16px;line-height:1.7;color:rgba(255,255,255,.82);margin-bottom:28px}
+.edit-band-img{aspect-ratio:5/4;border-radius:4px;background-size:cover;background-position:center;background-image:url(https://images.unsplash.com/photo-1534483509719-3feaee7c30da?w=900&h=720&fit=crop&q=80)}
+
+/* Gift cards section */
+.giftcards-section{padding:64px 0;background:var(--bg)}
+
+/* Blog preview */
+.blog-preview{padding:64px 0;background:var(--bg-soft)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.blog-card{background:transparent;border-bottom:2px solid var(--line);padding:0 0 24px;cursor:pointer;transition:border-color .15s ease}
+.blog-card:hover{border-bottom-color:var(--green)}
+.blog-card:hover .blog-title{color:var(--green)}
+.blog-img{aspect-ratio:7/4;background-size:cover;background-position:center;border-radius:4px;margin-bottom:16px}
+.blog-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:8px}
+.blog-title{font-size:18px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:8px;transition:color .15s ease}
+.blog-excerpt{font-size:14px;color:var(--ink-2);line-height:1.55;margin-bottom:14px}
+.blog-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.blog-date{font-size:12px;color:var(--ink-3)}
+.blog-read{font-size:13px;color:var(--green);font-weight:500;border-bottom:1px solid transparent;transition:border-color .15s ease}
+.blog-card:hover .blog-read{border-bottom-color:var(--green)}
+
+/* Page header banner (shop, articles, about, connect, legal) */
+.page-banner{background:var(--green-deep);padding:48px 0 56px;color:#fff}
+.page-banner .breadcrumb{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.page-banner h1{font-family:var(--serif);font-size:52px;font-weight:500;letter-spacing:-.012em;line-height:1.05;margin-bottom:8px;color:#fff}
+.page-banner .sub{font-size:15px;color:rgba(255,255,255,.72);max-width:560px;line-height:1.5}
+
+/* Filter bar */
+.filter-bar{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:64px;z-index:10}
+.filter-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0;flex-wrap:wrap}
+.filter-tabs{display:flex;align-items:center;gap:24px;overflow-x:auto;scrollbar-width:none}
+.filter-tabs::-webkit-scrollbar{display:none}
+.filter-tab{font-size:14px;font-weight:500;color:var(--ink-3);padding:8px 0;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .15s ease,border-color .15s ease}
+.filter-tab:hover{color:var(--ink)}
+.filter-tab.active{color:var(--ink);border-bottom-color:var(--orange)}
+.filter-sort{display:flex;align-items:center;gap:8px}
+.filter-sort label{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.1em}
+.filter-sort select{border:1px solid var(--line);border-radius:4px;padding:8px 28px 8px 12px;font-size:13px;background:#fff;color:var(--ink);cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%237A7A72' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+
+/* Shop grid */
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:40px 0 80px}
+
+/* Product page */
+.product-page{padding:48px 0 80px}
+.product-page .breadcrumb{font-size:12px;color:var(--ink-3);margin-bottom:24px}
+.product-page .breadcrumb a:hover{color:var(--green);border-bottom:1px solid var(--green)}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:flex-start}
+.product-img-wrap{aspect-ratio:1/1;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#fff}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover}
+.product-detail h1{font-family:var(--serif);font-size:40px;font-weight:500;letter-spacing:-.01em;line-height:1.15;margin:14px 0 18px}
+.product-price{font-size:28px;font-weight:700;color:var(--green);margin-bottom:20px}
+.product-divider{height:1px;background:var(--line);margin:24px 0}
+.product-desc{font-size:15px;color:var(--ink-2);line-height:1.7;margin-bottom:24px}
+.qty-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.qty-label{font-size:13px;font-weight:500;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em}
+.qty-control{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.qty-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ink-2);transition:background .15s ease}
+.qty-btn:hover{background:var(--bg-soft)}
+.qty-input{width:44px;height:38px;text-align:center;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ink);outline:none;background:transparent}
+.product-add{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.product-add .btn-primary{flex:1;min-width:200px;padding:14px 28px;font-size:15px}
+.back-link{font-size:13px;color:var(--ink-3);border-bottom:1px solid transparent;transition:border-color .15s ease}
+.back-link:hover{border-bottom-color:var(--ink-3)}
+.denom-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.denom-pill{padding:9px 16px;border:1px solid var(--line);border-radius:4px;font-size:14px;font-weight:500;color:var(--ink-2);cursor:pointer;background:#fff;transition:border-color .15s ease,background .15s ease,color .15s ease}
+.denom-pill:hover{border-color:var(--green-mid)}
+.denom-pill.active{border-color:var(--green);background:var(--green-pale);color:var(--green);font-weight:600}
+
+/* Product tabs */
+.product-tabs{margin-top:64px;border-top:1px solid var(--line);padding:48px 0}
+.tabs-nav{display:flex;gap:32px;border-bottom:1px solid var(--line);margin-bottom:32px}
+.tab-btn{font-size:14px;font-weight:500;color:var(--ink-3);padding:12px 0;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s ease,border-color .15s ease}
+.tab-btn.active{color:var(--ink);border-bottom-color:var(--orange)}
+.tab-pane{display:none;font-size:15px;line-height:1.7;color:var(--ink-2);max-width:760px}
+.tab-pane.active{display:block}
+.tab-pane p+p{margin-top:14px}
+.tab-pane dl{display:grid;grid-template-columns:160px 1fr;gap:14px 24px}
+.tab-pane dt{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);font-weight:500;align-self:center}
+.tab-pane dd{font-size:15px;color:var(--ink)}
+
+/* Related */
+.related{padding:48px 0 0}
+.related h2{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:20px}
+
+/* About page */
+.about-section{padding:80px 0}
+.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:64px;align-items:center}
+.about-grid h2{font-family:var(--serif);font-size:42px;font-weight:500;line-height:1.15;letter-spacing:-.01em;margin-bottom:20px}
+.about-grid p{font-size:16px;color:var(--ink-2);line-height:1.7;margin-bottom:18px}
+.about-meta{font-size:14px;color:var(--ink-3);line-height:1.7;border-top:1px solid var(--line);padding-top:18px;margin-top:8px}
+.about-img{aspect-ratio:3/2;border-radius:4px;background-size:cover;background-position:center;background-image:url(https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&h=600&fit=crop&q=80)}
+.about-text-block{padding:80px 0;background:var(--bg-soft)}
+.about-text-block .inner{max-width:720px;margin:0 auto}
+.about-text-block h2{font-family:var(--serif);font-size:36px;font-weight:500;letter-spacing:-.01em;margin-bottom:24px}
+.about-text-block p{font-size:15px;line-height:1.8;color:var(--ink-2);margin-bottom:18px}
+.about-links{display:flex;justify-content:center;gap:32px;padding:40px 0;flex-wrap:wrap}
+.about-links a{font-size:14px;color:var(--green);font-weight:500;border-bottom:1px solid transparent;transition:border-color .15s ease}
+.about-links a:hover{border-bottom-color:var(--green)}
+
+/* Articles page */
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;padding:40px 0 80px}
+
+/* Single article */
+.article-page{padding:32px 0 80px}
+.article-back{font-size:13px;color:var(--ink-3);margin-bottom:24px;display:inline-flex;align-items:center;gap:6px;border-bottom:1px solid transparent;transition:border-color .15s ease}
+.article-back:hover{border-bottom-color:var(--ink-3);color:var(--ink-2)}
+.article-hero{aspect-ratio:21/9;max-height:420px;border-radius:4px;background-size:cover;background-position:center;margin-bottom:32px}
+.article-meta-row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.article-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);font-weight:600}
+.article-date{font-size:12px;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase}
+.article-page h1{font-family:var(--serif);font-size:48px;font-weight:500;line-height:1.15;letter-spacing:-.012em;max-width:840px;margin-bottom:24px}
+.article-body{max-width:720px;font-size:16px;line-height:1.8;color:var(--ink-2)}
+.article-body p+p{margin-top:18px}
+.article-related{max-width:1280px;margin:64px auto 0;padding:48px 32px 0;border-top:1px solid var(--line)}
+.article-related h2{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:24px}
+
+/* Connect */
+.connect-section{padding:64px 0}
+.connect-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:flex-start}
+.contact-form{background:#fff;border:1px solid var(--line);border-radius:4px;padding:40px}
+.contact-form h2{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.contact-form .sub{font-size:14px;color:var(--ink-2);margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field label{font-size:12px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
+.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:4px;padding:11px 14px;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .15s ease}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green)}
+.field textarea{min-height:130px;resize:vertical;font-family:var(--sans)}
+.contact-info{background:var(--green-pale);border:1px solid var(--green-mid);border-radius:4px;padding:40px}
+.contact-info h3{font-size:18px;font-weight:700;color:var(--green);margin-bottom:18px}
+.contact-info dl{display:grid;grid-template-columns:60px 1fr;gap:14px 16px;margin-bottom:24px}
+.contact-info dt{font-size:11px;font-weight:600;color:var(--green);letter-spacing:.1em;text-transform:uppercase;align-self:start;padding-top:2px}
+.contact-info dd{font-size:14px;color:var(--ink);line-height:1.55}
+.contact-info dd a:hover{color:var(--green);border-bottom:1px solid var(--green)}
+.contact-success{padding:32px 8px}
+.contact-success h2{font-family:var(--serif);font-size:32px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px;color:var(--green)}
+.contact-success .sub{font-size:15px;color:var(--ink-2);margin-bottom:20px}
+.contact-success .contact-reset{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--green);border-bottom:1px solid var(--green);padding-bottom:2px;transition:color .15s ease,border-color .15s ease}
+.contact-success .contact-reset:hover{color:var(--orange);border-bottom-color:var(--orange)}
+
+/* Cart page */
+.cart-page{padding:48px 0 96px}
+.cart-empty{text-align:center;padding:80px 0;max-width:520px;margin:0 auto}
+.cart-empty h2{font-family:var(--serif);font-size:40px;font-weight:500;margin-bottom:14px}
+.cart-empty p{font-size:15px;color:var(--ink-2);margin-bottom:24px}
+.cart-empty a{color:var(--green);font-weight:600;border-bottom:1px solid var(--green)}
+.cart-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:40px;align-items:flex-start}
+.cart-list-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}
+.cart-list-head h2{font-size:22px;font-weight:700;color:var(--ink)}
+.cart-list-head .count{font-size:13px;color:var(--ink-3)}
+.cart-item{display:grid;grid-template-columns:80px 1fr auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.cart-item-img{width:80px;height:80px;border-radius:4px;border:1px solid var(--line);overflow:hidden;background:#fff}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-name{font-size:15px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:4px}
+.cart-item-cat{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.cart-item-price{font-size:15px;font-weight:700;color:var(--green)}
+.cart-item-controls{display:flex;align-items:center;gap:12px}
+.cart-item-controls .qty-control{height:34px}
+.cart-item-controls .qty-btn{width:32px;height:32px;font-size:14px}
+.cart-item-controls .qty-input{height:32px;width:36px;font-size:13px}
+.cart-remove{font-size:12px;color:var(--ink-3);text-decoration:underline;cursor:pointer;transition:color .15s ease}
+.cart-remove:hover{color:var(--orange)}
+.cart-summary{position:sticky;top:140px;background:#fff;border:1px solid var(--line);border-radius:4px;padding:28px}
+.cart-summary h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:16px}
+.cart-line{display:flex;justify-content:space-between;font-size:14px;color:var(--ink-2);padding:6px 0}
+.cart-total{display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:var(--ink);border-top:1px solid var(--line);padding-top:14px;margin-top:6px}
+.cart-info-box{background:var(--green-pale);border:1px solid var(--green-mid);border-radius:4px;padding:14px;font-size:13px;color:var(--green);line-height:1.5;margin:18px 0}
+.cart-disclaimer{font-size:13px;color:var(--ink-3);margin-top:10px;text-align:center}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,53,36,.45);display:none;align-items:center;justify-content:center;z-index:1000;padding:24px}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border:1px solid var(--line);border-radius:4px;padding:48px;max-width:480px;width:100%;text-align:center}
+.modal h2{font-family:var(--serif);font-size:36px;font-weight:500;margin-bottom:8px}
+.modal .ref{font-size:13px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px;font-weight:500}
+.modal p{font-size:15px;color:var(--ink-2);line-height:1.65;margin-bottom:24px}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:#fff;padding:12px 20px;border-radius:4px;font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:1100;box-shadow:var(--shadow-sm)}
+.toast.show{opacity:1}
+
+/* Legal pages */
+.legal-page{padding:64px 0 80px;max-width:760px;margin:0 auto;padding-left:32px;padding-right:32px}
+.legal-page .updated{font-size:13px;color:var(--ink-3);margin-bottom:32px}
+.legal-page h2{font-family:var(--serif);font-size:24px;font-weight:500;margin:36px 0 12px;color:var(--ink)}
+.legal-page p{font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:14px}
+.legal-page ul{padding-left:24px;margin-bottom:14px}
+.legal-page ul li{font-size:15px;color:var(--ink-2);line-height:1.75;list-style:disc;margin-bottom:6px}
+
+/* Footer */
+.footer{background:var(--green);color:rgba(255,255,255,.78);padding:64px 0 32px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:48px;padding-bottom:48px}
+.footer-brand .brand-mark{background:#fff;color:var(--green)}
+.footer-brand .brand-word{color:#fff}
+.footer-brand .brand-word i{color:#fff;opacity:.85}
+.footer-tag{margin-top:18px;font-size:14px;color:rgba(255,255,255,.65);line-height:1.6;max-width:280px}
+.footer-newsletter{margin-top:22px;display:flex;gap:8px}
+.footer-newsletter input{flex:1;background:transparent;border:1px solid rgba(255,255,255,.25);border-radius:4px;padding:10px 12px;font-size:13px;color:#fff;outline:none}
+.footer-newsletter input::placeholder{color:rgba(255,255,255,.5)}
+.footer-newsletter input:focus{border-color:rgba(255,255,255,.5)}
+.footer-newsletter button{background:var(--orange);color:#fff;font-size:13px;font-weight:600;padding:0 16px;border-radius:4px;transition:background .15s ease}
+.footer-newsletter button:hover{background:#cc511a}
+.footer h4{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#fff;font-weight:600;margin-bottom:18px}
+.footer ul li{margin-bottom:10px}
+.footer ul a{font-size:14px;color:rgba(255,255,255,.7);transition:color .15s ease}
+.footer ul a:hover{color:#fff}
+.footer-contact{font-size:14px;color:rgba(255,255,255,.7);line-height:1.7}
+.footer-contact a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:24px;display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);flex-wrap:wrap;gap:12px}
+
+/* Responsive */
+@media (max-width:1024px){
+  .nav-links{gap:20px}
+  .nav-search{width:160px}
+  .hero h1{font-size:48px}
+  h2.section-title{font-size:34px}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .shop-grid{grid-template-columns:repeat(3,1fr)}
+  .blog-grid,.articles-grid{grid-template-columns:repeat(2,1fr)}
+  .product-grid,.about-grid,.cart-grid,.edit-band-grid,.connect-grid{grid-template-columns:1fr;gap:40px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media (max-width:820px){
+  .nav-toggle{display:flex}
+  .nav-search{display:none}
+  .nav-links{position:absolute;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px 0;display:none;box-shadow:var(--shadow-sm)}
+  body.menu-open .nav-links{display:flex}
+  .nav-link{padding:14px 24px;border-bottom:none;border-left:3px solid transparent;font-size:15px}
+  .nav-link.active{border-bottom-color:transparent;border-left-color:var(--orange)}
+}
+@media (max-width:640px){
+  .nav-inner{padding:0 18px;gap:12px}
+  .container{padding:0 18px}
+  .hero-inner{padding:60px 18px}
+  .hero h1{font-size:38px}
+  .hero p.lead{font-size:15px}
+  h2.section-title{font-size:28px}
+  .cat-grid,.shop-grid{grid-template-columns:repeat(2,1fr)}
+  .blog-grid,.articles-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .page-banner h1{font-size:36px}
+  .article-page h1{font-size:32px}
+  .product-detail h1{font-size:28px}
+  .modal{padding:32px 24px}
+  .modal h2{font-size:28px}
+}
+@media (max-width:480px){
+  .cat-grid,.shop-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .scroller .product-card{flex:0 0 220px}
+}
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announce" id="announce">
+  <span>Free shipping on orders over $75 — use code <strong>GOURMET</strong> at checkout.</span>
+  <button class="announce-close" onclick="dismissAnnounce()" aria-label="Dismiss">&times;</button>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="brand" onclick="navigate('home',event)">
+      <span class="brand-mark">G</span>
+      <span class="brand-word">Gourmet <i>Marketplace</i></span>
+    </a>
+    <div class="nav-links">
+      <a href="#home" class="nav-link" data-route="home" onclick="navigate('home',event)">Home</a>
+      <a href="#about" class="nav-link" data-route="about" onclick="navigate('about',event)">Our Story</a>
+      <a href="#articles" class="nav-link" data-route="articles" onclick="navigate('articles',event)">Articles</a>
+      <a href="#shop" class="nav-link" data-route="shop" onclick="navigate('shop',event)">Shop</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Search products..." aria-label="Search">
+      </div>
+      <button class="cart-btn" onclick="navigate('cart')" aria-label="Cart">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 3H4L4.4 5M5 11H14L17 5H4.4M5 11L4.4 5M5 11L3.5 13.5H15M7 16C7 16.5523 6.55228 17 6 17C5.44772 17 5 16.5523 5 16C5 15.4477 5.44772 15 6 15C6.55228 15 7 15.4477 7 16ZM14 16C14 16.5523 13.5523 17 13 17C12.4477 17 12 16.5523 12 16C12 15.4477 12.4477 15 13 15C13.5523 15 14 15.4477 14 16Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+        <svg class="icon-open" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6H17M3 10H17M3 14H17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="icon-close" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<div class="page" id="pg-home">
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="breadcrumb">Gourmet Marketplace · Charlotte, NC</div>
+      <h1>Fresh Finds. Global Flavors. Everyday Gourmet.</h1>
+      <p class="lead">Hand-selected ingredients, specialty goods, and chef-driven staples — shipped to your door from Charlotte, NC.</p>
+      <div class="hero-actions">
+        <a href="#shop" class="btn btn-primary" onclick="navigate('shop',event)">Shop Now</a>
+        <a href="#about" class="btn btn-outline-light" onclick="navigate('about',event)">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="container">
+      <div class="featured-head">
+        <div class="featured-head-left">
+          <div class="section-label">Gourmet Goods, Delivered</div>
+          <h2 class="section-title">Fresh from the Marketplace</h2>
+        </div>
+        <a href="#shop" class="featured-link" onclick="navigate('shop',event)">See all 68 products →</a>
+      </div>
+      <div class="scroller" id="featuredScroller"></div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="container">
+      <div class="section-label">By Category</div>
+      <h2 class="section-title">Shop by Category</h2>
+      <p class="section-sub">Six tightly edited categories. Each product is here because it earns its shelf space.</p>
+      <div class="cat-grid" id="catGrid"></div>
+    </div>
+  </section>
+
+  <section class="edit-band">
+    <div class="container">
+      <div class="edit-band-grid">
+        <div>
+          <div class="section-label on-dark">Specialty Food Store</div>
+          <h2>68 specialty products. One place.</h2>
+          <p>From Danny Trejo's hot sauces to algae-derived omega-3 supplements — Gourmet Marketplace stocks products worth buying, from producers worth knowing about. Based in Charlotte, NC. Ships nationwide.</p>
+          <a href="#shop" class="btn btn-outline-light" onclick="navigate('shop',event)">Browse the Shop</a>
+        </div>
+        <div class="edit-band-img" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="giftcards-section">
+    <div class="container">
+      <div class="featured-head">
+        <div class="featured-head-left">
+          <div class="section-label">Gift Cards</div>
+          <h2 class="section-title">Grocery Store Gift Cards</h2>
+          <p class="section-sub">Kroger, Safeway, Instacart, Albertsons, and more. Available from $10 to $500.</p>
+        </div>
+      </div>
+      <div class="scroller" id="giftcardScroller"></div>
+    </div>
+  </section>
+
+  <section class="blog-preview">
+    <div class="container">
+      <div class="featured-head">
+        <div class="featured-head-left">
+          <div class="section-label">The Journal</div>
+          <h2 class="section-title">The Gourmet Journal</h2>
+          <p class="section-sub">Buying guides, deals, and notes from the Charlotte specialty food scene.</p>
+        </div>
+        <a href="#articles" class="featured-link" onclick="navigate('articles',event)">All articles →</a>
+      </div>
+      <div class="blog-grid" id="blogPreview"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ SHOP ============ -->
+<div class="page" id="pg-shop">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Shop</div>
+      <h1>The Gourmet Shop</h1>
+      <p class="sub">68 products — hot sauces, energy drinks, coffee, health, pantry staples, and grocery gift cards.</p>
+    </div>
+  </section>
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filter-inner">
+        <div class="filter-tabs" id="shopTabs">
+          <div class="filter-tab active" data-cat="all">All</div>
+          <div class="filter-tab" data-cat="hot-sauce">Hot Sauce</div>
+          <div class="filter-tab" data-cat="energy">Energy</div>
+          <div class="filter-tab" data-cat="coffee-tea">Coffee &amp; Tea</div>
+          <div class="filter-tab" data-cat="health">Health</div>
+          <div class="filter-tab" data-cat="pantry">Pantry</div>
+          <div class="filter-tab" data-cat="giftcard">Gift Cards</div>
+        </div>
+        <div class="filter-sort">
+          <label for="sortSel">Sort</label>
+          <select id="sortSel" onchange="renderShop()">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="name">Name A–Z</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<!-- ============ PRODUCT ============ -->
+<div class="page" id="pg-product">
+  <div class="container product-page" id="productContainer"></div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<div class="page" id="pg-about">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Our Story</div>
+      <h1>Gourmet &amp; Specialty Foods</h1>
+      <p class="sub">A small, independent specialty food store based in Charlotte, NC.</p>
+    </div>
+  </section>
+  <section class="about-section">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="section-label">Our Story</div>
+          <h2>A grocery store worth shopping.</h2>
+          <p>Gourmet Marketplace is your destination for hand-selected ingredients, specialty goods, and chef-driven staples from around the world. Whether you're stocking your kitchen with premium pantry essentials, searching for the best hot sauce, or finding a gift for a food lover in your life — we bring the best of the specialty food world to one place.</p>
+          <p>Based in Charlotte, NC. Shipping nationwide.</p>
+          <div class="about-meta">
+            1422 S Tryon Street, Suite 300<br>
+            Charlotte, NC 28203<br>
+            T: 1 (347) 986 1258<br>
+            E: <a href="mailto:info@gourmetmarketplace.co">info@gourmetmarketplace.co</a>
+          </div>
+        </div>
+        <div class="about-img" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+  <section class="about-text-block">
+    <div class="container">
+      <div class="inner">
+        <div class="section-label">What's on the shelves</div>
+        <h2>What we stock and why.</h2>
+        <p>Our range covers hot sauces from Danny Trejo's brand, premium loose-leaf tea and specialty coffee, high-protein snacks and supplements, bulk gourmet popcorn, and grocery gift cards from Kroger, Safeway, Instacart, and more.</p>
+        <p>Every product is selected because it's genuinely good — not because it fills a category quota. We stock 68 products and we know every one of them.</p>
+        <p>If you have a question about a product, sourcing, or how something is made, write to us. The same person who picks the products answers the email.</p>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <div class="about-links">
+      <a href="#home" onclick="navigate('home',event)">Home</a>
+      <a href="#shop" onclick="navigate('shop',event)">Shop</a>
+      <a href="#articles" onclick="navigate('articles',event)">Articles</a>
+      <a href="#connect" onclick="navigate('connect',event)">Connect</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ARTICLES ============ -->
+<div class="page" id="pg-articles">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Articles</div>
+      <h1>The Gourmet Journal</h1>
+      <p class="sub">Buying guides, recipes, and notes from the specialty food world.</p>
+    </div>
+  </section>
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filter-inner">
+        <div class="filter-tabs" id="articleTabs">
+          <div class="filter-tab active" data-tag="all">All</div>
+          <div class="filter-tab" data-tag="Guides">Guides</div>
+          <div class="filter-tab" data-tag="Deals">Deals</div>
+          <div class="filter-tab" data-tag="Tips">Tips</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="articles-grid" id="articlesGrid"></div>
+  </div>
+</div>
+
+<!-- ============ ARTICLE ============ -->
+<div class="page" id="pg-article">
+  <div class="container article-page" id="articleContainer"></div>
+  <div class="article-related" id="articleRelated"></div>
+</div>
+
+<!-- ============ CONNECT ============ -->
+<div class="page" id="pg-connect">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Connect</div>
+      <h1>Get in Touch</h1>
+      <p class="sub">Questions about a product, an order, or wholesale? We answer every email.</p>
+    </div>
+  </section>
+  <section class="connect-section">
+    <div class="container">
+      <div class="connect-grid">
+        <div class="contact-form" id="contactCard">
+          <form id="contactForm" onsubmit="submitContact(event)">
+            <h2>Send a message</h2>
+            <p class="sub">We respond within one business day.</p>
+            <div class="form-row">
+              <div class="field"><label>First Name</label><input type="text" required></div>
+              <div class="field"><label>Last Name</label><input type="text" required></div>
+            </div>
+            <div class="field"><label>Email</label><input type="email" required></div>
+            <div class="field"><label>Subject</label>
+              <select required>
+                <option value="">Select a topic</option>
+                <option>Order question</option>
+                <option>Product inquiry</option>
+                <option>Wholesale</option>
+                <option>Press</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field"><label>Message</label><textarea required></textarea></div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          </form>
+          <div class="contact-success" id="contactSuccess" hidden>
+            <h2>Message sent.</h2>
+            <p class="sub">We'll be in touch within 24 hours.</p>
+            <a href="#" class="contact-reset" onclick="resetContact(event)">Send another message →</a>
+          </div>
+        </div>
+        <aside class="contact-info">
+          <h3>Gourmet Marketplace</h3>
+          <dl>
+            <dt>Address</dt>
+            <dd>1422 S Tryon Street, Suite 300<br>Charlotte, NC 28203</dd>
+            <dt>Phone</dt>
+            <dd><a href="tel:13479861258">1 (347) 986 1258</a></dd>
+            <dt>Email</dt>
+            <dd><a href="mailto:info@gourmetmarketplace.co">info@gourmetmarketplace.co</a></dd>
+            <dt>Hours</dt>
+            <dd>Mon–Fri 9am–5pm EST</dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CART ============ -->
+<div class="page" id="pg-cart">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Cart</div>
+      <h1>Your Cart</h1>
+      <p class="sub">Review your items. We'll confirm your order by email within 24 hours.</p>
+    </div>
+  </section>
+  <div class="container">
+    <div class="cart-page" id="cartPage"></div>
+  </div>
+</div>
+
+<!-- ============ TERMS ============ -->
+<div class="page" id="pg-terms">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Terms of Use</div>
+      <h1>Terms of Use</h1>
+    </div>
+  </section>
+  <div class="legal-page">
+    <div class="updated">Last updated January 2025</div>
+    <p>These Terms of Use ("Terms") govern your access to and use of the website operated by Gourmet Marketplace LLC ("we", "us", "our"). By using this site you agree to be bound by these Terms.</p>
+    <h2>1. Accounts</h2>
+    <p>You may purchase as a guest or create an account. If you create an account you are responsible for maintaining the confidentiality of your login credentials and for all activity under your account.</p>
+    <h2>2. Orders and Pricing</h2>
+    <p>All prices are in US dollars and are subject to change without notice. We reserve the right to refuse or cancel any order at our discretion, including in the event of pricing errors, suspected fraud, or stock unavailability. If we cancel an order after charging your payment method, we will issue a full refund.</p>
+    <h2>3. Shipping</h2>
+    <p>We ship within the continental United States. Shipping times depend on the carrier, destination, and product type. Perishable goods are shipped Monday through Wednesday to avoid weekend transit. Free standard shipping is available on orders of $75 or more using code GOURMET.</p>
+    <h2>4. Returns</h2>
+    <p>Items may be returned within 30 days of delivery in original, unopened condition. Perishable goods, gift cards, and clearance items are non-refundable. See our Returns Policy for full details.</p>
+    <h2>5. Intellectual Property</h2>
+    <p>All content on this site — including text, photography, logos, and product copy — is the property of Gourmet Marketplace LLC or its content suppliers and is protected by US and international copyright law.</p>
+    <h2>6. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Gourmet Marketplace LLC will not be liable for indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of the site.</p>
+    <h2>7. Governing Law</h2>
+    <p>These Terms are governed by the laws of the State of North Carolina, without regard to its conflict-of-law principles. Any dispute arising under these Terms will be resolved in the state or federal courts located in Mecklenburg County, NC.</p>
+    <h2>8. Contact</h2>
+    <p>Questions about these Terms? Email us at <a href="mailto:info@gourmetmarketplace.co" style="color:var(--green);text-decoration:underline">info@gourmetmarketplace.co</a>.</p>
+  </div>
+</div>
+
+<!-- ============ PRIVACY ============ -->
+<div class="page" id="pg-privacy">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Privacy Policy</div>
+      <h1>Privacy Policy</h1>
+    </div>
+  </section>
+  <div class="legal-page">
+    <div class="updated">Last updated January 2025</div>
+    <p>Gourmet Marketplace LLC respects your privacy and is committed to protecting your personal data. This policy explains what information we collect, how we use it, and your rights.</p>
+    <h2>Information We Collect</h2>
+    <ul>
+      <li>Contact details (name, email, shipping and billing address, phone number) provided when you place an order or sign up for our newsletter.</li>
+      <li>Payment information processed by our payment provider — we do not store full card numbers.</li>
+      <li>Browsing data such as IP address, device type, and pages viewed, collected via cookies and analytics.</li>
+    </ul>
+    <h2>How We Use Your Information</h2>
+    <ul>
+      <li>To process and fulfill your orders.</li>
+      <li>To send order confirmations, shipping updates, and customer service communication.</li>
+      <li>To send newsletters and marketing — only if you opt in. You can unsubscribe at any time.</li>
+      <li>To improve the site's performance and user experience.</li>
+    </ul>
+    <h2>Cookies</h2>
+    <p>We use cookies to keep your cart populated between sessions, to remember your preferences, and to gather aggregated analytics. You can disable cookies in your browser settings, though some site features may not work as expected.</p>
+    <h2>Sharing</h2>
+    <p>We do not sell your personal information. We share data only with service providers who help us operate the business — payment processors, shipping carriers, and email platforms — and only the minimum information they need.</p>
+    <h2>Your Rights</h2>
+    <p>You can request a copy, correction, or deletion of your personal data at any time by emailing <a href="mailto:info@gourmetmarketplace.co" style="color:var(--green);text-decoration:underline">info@gourmetmarketplace.co</a>.</p>
+    <h2>Children</h2>
+    <p>This site is not directed at children under 13. We do not knowingly collect data from children under 13.</p>
+    <h2>Changes</h2>
+    <p>We may update this policy from time to time. The "Last updated" date at the top of the page reflects the most recent revision.</p>
+  </div>
+</div>
+
+<!-- ============ RETURNS ============ -->
+<div class="page" id="pg-returns">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Returns</div>
+      <h1>Returns Policy</h1>
+    </div>
+  </section>
+  <div class="legal-page">
+    <div class="updated">Last updated January 2025</div>
+    <p>We want you to be happy with everything you order from Gourmet Marketplace. If something is not right, here is how returns work.</p>
+    <h2>30-Day Window</h2>
+    <p>Most items can be returned within 30 days of delivery for a full refund of the product price. Original shipping charges are non-refundable.</p>
+    <h2>What Can Be Returned</h2>
+    <ul>
+      <li>Unopened, shelf-stable goods in original packaging.</li>
+      <li>Damaged or defective items — please contact us within 7 days of delivery so we can replace or refund.</li>
+    </ul>
+    <h2>What Cannot Be Returned</h2>
+    <ul>
+      <li>Perishable goods that have been opened.</li>
+      <li>Gift cards.</li>
+      <li>Clearance and final-sale items.</li>
+      <li>Custom and bulk-order items unless damaged in transit.</li>
+    </ul>
+    <h2>How to Initiate a Return</h2>
+    <p>Email <a href="mailto:info@gourmetmarketplace.co" style="color:var(--green);text-decoration:underline">info@gourmetmarketplace.co</a> with your order number and a brief description of the issue. We will respond within one business day with return instructions and a prepaid label if applicable.</p>
+    <h2>Refund Timing</h2>
+    <p>Refunds are processed within 5–7 business days of receipt of the returned item. Funds typically appear on your original payment method within an additional 3–5 business days, depending on your bank.</p>
+  </div>
+</div>
+
+<!-- ============ REWARDS TERMS ============ -->
+<div class="page" id="pg-rewards-terms">
+  <section class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">Home / Rewards Terms</div>
+      <h1>Rewards Program Terms</h1>
+    </div>
+  </section>
+  <div class="legal-page">
+    <div class="updated">Last updated January 2025</div>
+    <p>Gourmet Marketplace Rewards is a loyalty program offered by Gourmet Marketplace LLC. By enrolling, you agree to these terms.</p>
+    <h2>Earning Points</h2>
+    <p>Members earn 1 point per US dollar spent on qualifying purchases. Gift cards, taxes, and shipping charges do not earn points.</p>
+    <h2>Redeeming Points</h2>
+    <p>Points may be redeemed for discounts on future purchases at a rate of 100 points = $5. Points cannot be exchanged for cash or transferred between accounts.</p>
+    <h2>Expiration</h2>
+    <p>Points expire 12 months after the date they were earned if no qualifying activity occurs on the account during that period.</p>
+    <h2>Program Changes</h2>
+    <p>We reserve the right to modify or terminate the program at any time, with reasonable notice to members. Any unredeemed points at termination will be honored for 90 days following the termination date.</p>
+    <h2>Account Closure</h2>
+    <p>If you close your account or violate the terms of service, accumulated points may be forfeited.</p>
+    <h2>Questions</h2>
+    <p>Contact us at <a href="mailto:info@gourmetmarketplace.co" style="color:var(--green);text-decoration:underline">info@gourmetmarketplace.co</a> with any questions about your rewards balance.</p>
+  </div>
+</div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="brand" onclick="navigate('home',event)">
+          <span class="brand-mark">G</span>
+          <span class="brand-word">Gourmet <i>Marketplace</i></span>
+        </a>
+        <p class="footer-tag">Specialty food and grocery gift cards. Charlotte, NC.</p>
+        <form class="footer-newsletter" onsubmit="event.preventDefault();showToast('Subscribed — check your inbox.');this.reset()">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#home" onclick="navigate('home',event)">Home</a></li>
+          <li><a href="#shop" onclick="navigate('shop',event)">Shop</a></li>
+          <li><a href="#about" onclick="navigate('about',event)">Our Story</a></li>
+          <li><a href="#articles" onclick="navigate('articles',event)">Articles</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#connect" onclick="navigate('connect',event)">Connect</a></li>
+          <li><a href="#terms" onclick="navigate('terms',event)">Terms of Use</a></li>
+          <li><a href="#privacy" onclick="navigate('privacy',event)">Privacy Policy</a></li>
+          <li><a href="#returns" onclick="navigate('returns',event)">Returns</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p class="footer-contact">
+          1422 S Tryon Street<br>
+          Suite 300<br>
+          Charlotte, NC 28203<br><br>
+          T: <a href="tel:13479861258">1 (347) 986 1258</a><br>
+          E: <a href="mailto:info@gourmetmarketplace.co">info@gourmetmarketplace.co</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Gourmet Marketplace LLC</span>
+      <span>Healthy eating. Better living.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Order modal -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <h2>Order received.</h2>
+    <div class="ref" id="orderRef">Reference: #GM-00000</div>
+    <p>We'll email you at the address provided within 24 hours to confirm your order and arrange payment.</p>
+    <button class="btn btn-primary" onclick="closeOrderModal()">Continue Shopping</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   PRODUCTS
+============================================================ */
+const PRODUCTS = [
+  // HOT SAUCE & CONDIMENTS
+  {id:1,name:"Trejo's Hot Sauce – Original – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Original_TrejosHotSauce_Single_01_Full-300x300.jpg",desc:"Danny Trejo's signature medium-heat hot sauce. Cayenne pepper base with garlic and apple cider vinegar. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Medium"}},
+  {id:2,name:"Trejo's Hot Sauce – Habanero – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/HabaneroHotSauce_TrejosHotSauce_WhiteBG_01_3141258a-f290-478d-8cf9-82181765e656-300x300.jpg",desc:"High-heat habanero sauce with tropical fruit notes. Bold, fruity, and seriously hot. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Hot"}},
+  {id:3,name:"Trejo's Hot Sauce – Jalapeno – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Jalapeno_TrejosHotSauce_WhiteBG_01-300x300.jpg",desc:"Fresh jalapeno flavor with a mild to medium heat. Bright and versatile — works on everything. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Mild–Medium"}},
+  {id:4,name:"Trejo's Hot Sauce – Trinidad Moruga Scorpion – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/TrinidadMorugaScorpionPepper_TrejosHotSauce_WhiteBG_02_1x1_Web_825ba499-18d0-4393-8657-53ada2eb6444-300x300.jpg",desc:"Extreme heat from one of the world's hottest peppers. Not for the faint-hearted. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Extreme"}},
+  {id:5,name:"Trejo's Hot Sauce – Original – 12 Pack Case",price:145.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/TT_HotSauce12_800-300x300.jpg",desc:"A full case of 12 Original Trejo's Hot Sauce bottles. Stock the kitchen or share with friends.",details:{Format:"Case",Size:"12 × 5 oz",Origin:"USA",Heat:"Medium"}},
+  {id:6,name:"Trejo's Hot Honey – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Single-Bottle-300x300.jpg",desc:"Raw honey infused with chili peppers. Drizzle on pizza, cheese boards, fried chicken, or anything that needs a sweet-heat finish. 6oz.",details:{Format:"Bottle",Size:"6 oz",Origin:"USA",Heat:"Mild"}},
+  {id:7,name:"Trejo's Hot Honey – Six Pack Case",price:75.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/6pack-300x300.jpg",desc:"Six bottles of Trejo's Hot Honey. Best value for hot honey regulars or gift buyers.",details:{Format:"Case",Size:"6 × 6 oz",Origin:"USA",Heat:"Mild"}},
+
+  // ENERGY
+  {id:8,name:"Alani Nu Energy Drinks – 12 Cans, Electric Tie Dye (Cherry Limeade)",price:28.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AlaniElectric-300x300.jpg",desc:"200mg caffeine, zero sugar, cherry limeade flavor. 12oz cans. Case of 12.",details:{Format:"Case",Size:"12 × 12 oz",Origin:"USA",Caffeine:"200 mg"}},
+  {id:9,name:"Alani Nu Energy Drinks – 12 Cans, Cosmic Stardust",price:28.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AlaniCosmic-300x300.jpg",desc:"200mg caffeine, zero sugar, Cosmic Stardust flavor. Light, slightly tart, very drinkable. Case of 12.",details:{Format:"Case",Size:"12 × 12 oz",Origin:"USA",Caffeine:"200 mg"}},
+  {id:10,name:"3D Energy Drink – 12 Cans, Gold (Pina Colada)",price:23.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Gold-300x300.jpg",desc:"200mg caffeine, zero sugar, tropical pina colada flavor. Clean energy without the crash. Case of 12.",details:{Format:"Case",Size:"12 × 16 oz",Origin:"USA",Caffeine:"200 mg"}},
+  {id:11,name:"MULE 8PK",price:33.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/mule_300-300x300.jpg",desc:"Moscow Mule flavored energy drink. Ginger beer taste, caffeinated, zero alcohol. Pack of 8.",details:{Format:"Pack",Size:"8 cans",Origin:"USA",Caffeine:"160 mg"}},
+
+  // COFFEE & TEA
+  {id:12,name:"Camila's Organic – Ground Coarse – French Press – 2lbs",price:42.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Camilas-2lb-2-300x300.jpg",desc:"Organic single-origin coffee, coarse ground for French press. Rich, smooth, low-acid. 2lb bag.",details:{Format:"Bag",Size:"2 lb",Grind:"Coarse",Roast:"Medium"}},
+  {id:13,name:"Mathilde's French Roast – Ground Medium – Drip – 5lbs",price:88.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Mathildes-5lb-300x300.jpg",desc:"Dark French roast ground for drip coffee makers. Smoky, bold, full body. Office-ready 5lb bag.",details:{Format:"Bag",Size:"5 lb",Grind:"Medium",Roast:"Dark"}},
+  {id:14,name:"Classic Black Tea – 1lb Zip Pouch (Avg. 320 cups)",price:51.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CLASSIC_BLACK-3-300x300.jpg",desc:"Premium loose-leaf black tea. Full-bodied, brisk, and clean. One pound makes approximately 320 cups.",details:{Format:"Zip pouch",Size:"1 lb",Yields:"~320 cups",Origin:"India"}},
+  {id:15,name:"Art of Tea Book – 10 Art of Tea Books",price:293.20,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AOT-Book-Assets-10-Books-300x300.jpg",desc:"A set of 10 beautifully produced Art of Tea guide books. Covers tea history, brewing methods, and tasting notes. Gift-ready.",details:{Format:"Book set",Size:"10 books",Pages:"~180 ea",Type:"Hardcover"}},
+
+  // HEALTH & WELLNESS
+  {id:16,name:"Alpha Prime Bites Protein Mini Muffins – 12 Pack, Birthday Cake",price:41.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CPProductPages-2025-01-08T092257.002-300x300.jpg",desc:"High-protein mini muffins with 10g protein each. Birthday cake flavor. 12 individually wrapped muffins per box.",details:{Format:"Box",Size:"12 muffins",Protein:"10 g each",Flavor:"Birthday Cake"}},
+  {id:17,name:"Alpha Prime Bites Protein Mini Muffins – 12 Pack, Chocolate Fudge",price:41.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CPProductPages-2025-01-08T092359.920-300x300.jpg",desc:"High-protein mini muffins, chocolate fudge flavor. 10g protein each. 12 individually wrapped muffins per box.",details:{Format:"Box",Size:"12 muffins",Protein:"10 g each",Flavor:"Chocolate Fudge"}},
+  {id:18,name:"ISOPURE Protein RTD – 12 Bottles, Lemonade",price:47.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/ip-1113518_Image_01-300x300.png",desc:"Ready-to-drink whey protein isolate. 40g protein per bottle, zero carbs, lemonade flavor. Case of 12 bottles.",details:{Format:"Case",Size:"12 bottles",Protein:"40 g per bottle",Flavor:"Lemonade"}},
+  {id:19,name:"Nootropics – Gummies, 2-Pack",price:129.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/10Square-1-300x300.jpg",desc:"Cognitive support gummies with lion's mane, bacopa, and L-theanine. 60 gummies per pack. 2-pack bundle.",details:{Format:"Bundle",Size:"2 × 60 gummies",Active:"Lion's mane, bacopa, L-theanine"}},
+  {id:20,name:"TESTED BY YOU – DHA",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-300x300.png",desc:"Algae-derived DHA omega-3. Clinically tested, third-party verified. 90-day supply.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Algae",Type:"DHA omega-3"}},
+  {id:21,name:"TESTED BY YOU – Prenatal DHA",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-2-300x300.png",desc:"Prenatal DHA formulated for pregnancy and nursing. Algae-derived, mercury-free. 90-day supply.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Algae",Type:"Prenatal DHA"}},
+  {id:22,name:"TESTED BY YOU – Omega-3",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Orlo_RefillPacks_Omega3-300x300.jpg",desc:"High-absorption omega-3 from micro-algae. No fishy aftertaste. 90-day supply in refillable packaging.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Micro-algae",Type:"Omega-3"}},
+  {id:23,name:"TESTED BY YOU – DHA – 6 Packs",price:1980.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-1-300x300.png",desc:"Bulk purchase of 6 x 90-day DHA supplies. Best per-unit price for long-term supplementation or gifting.",details:{Format:"Bulk",Size:"6 × 90-day supply",Source:"Algae",Type:"DHA omega-3"}},
+  {id:24,name:"Peppermint Aromatherapy Packet 25 Count Box – 80 Pack",price:360.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Orlando_health-render-peppermint_ca22b483-bf2f-44a7-bd4d-8743be01276c-1-300x300.jpg",desc:"Single-use peppermint aromatherapy sachets. Used in clinical settings for nausea relief. Box of 25 packets, 80 boxes per case.",details:{Format:"Case",Size:"80 × 25 packets",Use:"Aromatherapy",Origin:"USA"}},
+
+  // PANTRY & BULK
+  {id:25,name:"Havarti Dill Pickle – 2 Gallon Tin (32 cups)",price:54.99,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/2galtincopy_e4276c30-7dd6-4199-a39a-eddc4a068754-300x300.jpg",desc:"Havarti dill flavored popcorn in a 2-gallon tin. 32 cups of gourmet popcorn. Great for offices and events.",details:{Format:"Tin",Size:"2 gal / 32 cups",Origin:"USA",Flavor:"Havarti Dill Pickle"}},
+  {id:26,name:"Havarti Dill Pickle – 4 Gallon Bulk Box (64 cups)",price:80.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/bulk_pop_box_4e9e73a2-f0bc-4d6c-beda-e19d16357c9c-300x300.png",desc:"Havarti dill flavored popcorn in a bulk 4-gallon box. 64 cups. Best value for large gatherings.",details:{Format:"Bulk box",Size:"4 gal / 64 cups",Origin:"USA",Flavor:"Havarti Dill Pickle"}},
+  {id:27,name:"Blackened Bacon Cheddar – 4 Gallon Bulk Box (64 cups)",price:80.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/BlackenedBacon-2-300x300.png",desc:"Blackened bacon cheddar flavored popcorn. 4-gallon bulk box, 64 cups. Bold, savory, impossible to stop eating.",details:{Format:"Bulk box",Size:"4 gal / 64 cups",Origin:"USA",Flavor:"Blackened Bacon Cheddar"}},
+  {id:28,name:"Kettle Corn – 24-pack snack pack 1 oz",price:72.99,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/3OZ-BLUE-300x300.png",desc:"Classic sweet-and-salty kettle corn in 1oz single-serve snack packs. Case of 24. Ideal for offices and snack stations.",details:{Format:"Case",Size:"24 × 1 oz",Origin:"USA",Flavor:"Kettle Corn"}},
+  {id:29,name:"Organic Extra Virgin Avocado Oil – Everyday 375ml",price:68.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/20241110_Westbourne_101_39cfd4ae-88b0-41cc-a009-08d8f132c026-scaled-1-300x300.jpg",desc:"Cold-pressed organic avocado oil. Smoke point 500°F. Use for cooking, finishing, and dressings. 375ml bottle.",details:{Format:"Bottle",Size:"375 ml",Origin:"Organic",SmokePoint:"500°F"}},
+  {id:30,name:"The Natural Seaweed Soup – 1-Month Cure",price:185.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/imageedit_1_4079834593-300x300.jpg",desc:"Traditional Korean seaweed soup concentrate. 30-day supply. Used for postpartum recovery and immune support.",details:{Format:"Concentrate",Size:"30-day supply",Origin:"Korea",Use:"Daily soup base"}},
+  {id:31,name:"The Natural Seaweed Soup – 3-Month Recovery",price:545.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/imageedit_1_4079834593-1-300x300.jpg",desc:"3-month supply of traditional Korean seaweed soup concentrate. Best value for extended recovery and wellness programs.",details:{Format:"Concentrate",Size:"90-day supply",Origin:"Korea",Use:"Daily soup base"}},
+
+  // GIFT CARDS
+  {id:32,name:"For the Love of Grocery",priceFrom:20,priceTo:2000,denominations:[20,50,100,200,500,1000,2000],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/12/Grocery-300x300.png",desc:"Redeemable across the Gourmet Marketplace product catalogue. Available in amounts from $20 to $2,000.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$20–$2,000"}},
+  {id:33,name:"Kroger Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/03/Kroger-300x300.png",desc:"Accepted at all Kroger family stores including Kroger, Fred Meyer, King Soopers, and more. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:34,name:"Safeway Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/03/Safeway-Gift-Card-300x300.png",desc:"Redeemable at all Safeway locations nationwide. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:35,name:"Instacart Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/02/instacart-300x300.png",desc:"Shop from Whole Foods, Costco, Aldi, and 1,400+ retailers via Instacart delivery. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:36,name:"Meijer Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2024/12/Meijer-Gift-Card-300x300.png",desc:"Accepted at all Meijer supercenters across the Midwest. Covers groceries, pharmacy, and general merchandise. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:37,name:"Ralphs Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/02/Ralphs-Gift-Card-300x300.png",desc:"Redeemable at all Ralphs grocery stores in California. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:38,name:"Albertsons Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/02/Albertsons-Gift-Card-300x300.png",desc:"Accepted at Albertsons, Vons, Pavilions, and affiliated stores. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}}
+];
+
+const CATEGORIES = [
+  {key:"hot-sauce",name:"Hot Sauce & Condiments"},
+  {key:"energy",name:"Energy Drinks"},
+  {key:"coffee-tea",name:"Coffee & Tea"},
+  {key:"health",name:"Health & Wellness"},
+  {key:"pantry",name:"Pantry & Bulk"},
+  {key:"giftcard",name:"Gift Cards"}
+];
+
+const ARTICLES = [
+  {id:"a1",tag:"Guides",title:"What to Buy (and Skip) at Farmers Markets",date:"April 2025",img:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=900&h=540&fit=crop&q=80",excerpt:"Farmers markets offer fresh produce and local products — but not everything there is worth your money. Here's how to shop them well.",body:[
+    "The first rule of farmers markets is that not every stall is run by a farmer. Some are resellers buying wholesale and marking up. Once you can spot the difference — produce that's a little less perfect, signs that change with the season, sellers who can talk about their soil — your money goes to the right people.",
+    "Stone fruit, tomatoes, leafy greens, eggs, and honey are almost always worth buying at the market. They're at peak quality, the prices are competitive once you factor out the supermarket's chilled-storage tax, and you'll taste the difference at home in a way that justifies the trip.",
+    "Skip the things that don't have a quality story to tell: out-of-season fruit shipped in from elsewhere, packaged baked goods that have sat all morning, and condiments that exist mostly to look good on the table. A market vendor's hot sauce is usually a worse buy than a $15 bottle from a brand that ferments and tests its product.",
+    "If you're cooking for the week, build the trip around two or three things you actually plan to use, not a basket of beautiful things you'll forget about. Specialty markets like ours are designed to fill in the gaps — pantry staples, oils, salts, sauces — so the farmers market can stay focused on what it does best."
+  ]},
+  {id:"a2",tag:"Guides",title:"A Guide to International Hot Sauces",date:"March 2025",img:"https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=900&h=540&fit=crop&q=80",excerpt:"Hot sauce culture has exploded in the last decade. From Mexican salsas to Trinidadian scorpion pepper sauces — a guide to what's worth trying.",body:[
+    "Hot sauce went from a niche to a category of its own in about ten years. Now there are vinegar-based Louisiana sauces, fermented Mexican salsas, sweet-spicy Caribbean blends, and the extreme-heat sauces built around peppers like the Trinidad Moruga Scorpion. The label tells you what to expect — but only if you read it.",
+    "Look at the first three ingredients. If it leads with sugar or water, the heat will be diluted and the flavor will be flat. If it leads with peppers, vinegar, and a vegetable like onion or carrot, you're in good hands.",
+    "Heat level isn't the only spectrum. There's bright versus deep — a fresh jalapeño sauce is bright, a smoky chipotle sauce is deep. There's pure versus complex — a single-pepper sauce reads cleanly, a blend reads layered. Most kitchens benefit from one of each.",
+    "Our shelves carry Trejo's range, which spans mild jalapeño all the way through habanero and the scorpion-pepper extreme heat. The Hot Honey is the household crowd-pleaser — sweet enough for cheese boards, hot enough to register."
+  ]},
+  {id:"a3",tag:"Tips",title:"How to Build a Specialty Pantry on a Budget",date:"February 2025",img:"https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&h=540&fit=crop&q=80",excerpt:"A well-stocked specialty pantry doesn't have to cost a fortune. These 10 items give you the most range for the least spend.",body:[
+    "A specialty pantry isn't a rich-person hobby — it's a way of cooking better food at home for less than the cost of takeout. The trick is buying the right ten things instead of fifty.",
+    "Start with one good oil, one good vinegar, one good salt, and one good chili. That's the four-corner foundation. From there, add one umami booster (anchovies, fish sauce, or miso), one acid you can drink (a tinned citrus juice, a ferment), and one sweet finishing element (good honey or hot honey).",
+    "Buy quantity in the things you use weekly: olive oil, salt, coffee. Buy small in the things you use monthly: a specialty vinegar, a hot sauce. The grocery-store impulse to buy big sizes everywhere is a trap — half of it goes stale.",
+    "If you do this and add one fresh shop a week — produce, eggs, dairy, bread — your weeknight cooking gets faster and better at the same time. The pantry does the heavy lifting of flavor; the fresh shop just provides the canvas."
+  ]},
+  {id:"a4",tag:"Tips",title:"The Case for Buying Coffee in Bulk",date:"January 2025",img:"https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=900&h=540&fit=crop&q=80",excerpt:"Buying 2–5lb bags of good coffee saves money and tastes better than grocery store beans. Here's exactly why and what to buy.",body:[
+    "The economics of coffee at scale are simple: a 12oz bag of supermarket coffee runs about $14. A 2lb bag of comparable specialty coffee runs about $42. Per ounce, the specialty is cheaper. Per cup, the specialty is much cheaper.",
+    "The other thing buying in bulk gets you is freshness. A 2lb bag in a sealed container, opened daily, lasts a heavy household 3–4 weeks — well within the window where the beans still taste like beans. Most supermarket coffee was roasted six weeks before it arrived on the shelf.",
+    "If you don't drink that much, find a friend to split with. The bag is one decision; how you brew is the other. Coarse grind for French press, medium for drip, fine for moka pot. Buying pre-ground locks you into one method.",
+    "We carry Camila's Organic in 2lb coarse-ground bags for French press, and Mathilde's French Roast in 5lb medium-ground bags for drip — the second one is sized for offices but works at home for a heavy-coffee household."
+  ]},
+  {id:"a5",tag:"Deals",title:"Grocery Gift Cards: A Smarter Way to Shop",date:"December 2024",img:"https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&h=540&fit=crop&q=80",excerpt:"Using grocery store gift cards for everyday spending unlocks cashback and rewards that cash or credit card don't. We break down how it works.",body:[
+    "Most people think of gift cards as gifts. But a grocery gift card bought through a marketplace can earn 4–6% cashback through credit-card category bonuses, then get spent at face value at the store. That's effectively a 4–6% discount on every grocery trip.",
+    "The trick: many credit cards offer rotating bonus categories that include online retailers and gift card shops, but not the grocery store directly. Buying a Kroger or Safeway card online captures the bonus, then you spend the card normally.",
+    "The math only works if you don't pay credit-card interest. Carry a balance and any rewards get wiped out by the interest rate. Pay in full each month and the savings are real.",
+    "Our shelves carry Kroger, Safeway, Albertsons, Ralphs, Meijer, and Instacart gift cards in $10–$500 denominations, plus our own Marketplace card for use on the site. Buy them like you'd buy groceries — in steady, predictable amounts."
+  ]},
+  {id:"a6",tag:"Guides",title:"Energy Drinks in 2025: What's Actually Worth Drinking",date:"November 2024",img:"https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=900&h=540&fit=crop&q=80",excerpt:"The energy drink market has matured. Zero sugar, clean caffeine, and better flavors are the new standard. These are the ones that actually deliver.",body:[
+    "The first wave of energy drinks was sugar bombs with too much caffeine. The second wave was sugar-free but still tasted artificial. The third wave — which we're in now — is zero-sugar drinks that taste like real fruit, with caffeine levels that match what a strong coffee delivers.",
+    "Two hundred milligrams is the right daily ceiling for most adults. That's one Alani Nu or one 3D Energy. If you find yourself needing more than that, the problem isn't the caffeine — it's the sleep upstream of it.",
+    "Flavor is the differentiator now that the formulation question is mostly solved. Cherry limeade, pina colada, and the more interesting blends like the Mule's ginger-beer profile are where the category is going. The brand that wins this decade will be the one that can make a good drink without leaning on sweeteners.",
+    "If you buy by the case, the per-can price drops to about $2.40 — comparable to a coffee-shop coffee, but easier to grab from the fridge. Stock the office or the home gym."
+  ]}
+];
+
+/* ============================================================
+   STATE
+============================================================ */
+let cart = [];
+let activeShopCat = "all";
+let activeArticleTag = "all";
+let currentProductId = null;
+let currentArticleId = null;
+
+const PAGES = ["home","shop","product","about","articles","article","connect","cart","terms","privacy","returns","rewards-terms"];
+
+/* ============================================================
+   MOBILE MENU
+============================================================ */
+function toggleMenu(){
+  const opened = document.body.classList.toggle('menu-open');
+  const tog = document.getElementById('navToggle');
+  if(tog){ tog.setAttribute('aria-expanded', opened?'true':'false'); }
+}
+document.addEventListener('click',e=>{
+  if(!document.body.classList.contains('menu-open')) return;
+  if(e.target.closest('.nav') || e.target.closest('.nav-toggle')) return;
+  document.body.classList.remove('menu-open');
+});
+
+/* ============================================================
+   ANNOUNCE BANNER
+============================================================ */
+function dismissAnnounce(){
+  const el = document.getElementById('announce');
+  el.classList.add('dismissed');
+  try{ sessionStorage.setItem('gm_announce_dismissed','1'); }catch(e){}
+}
+if(typeof sessionStorage!=='undefined' && sessionStorage.getItem('gm_announce_dismissed')==='1'){
+  document.getElementById('announce').classList.add('dismissed');
+}
+
+/* ============================================================
+   ROUTING
+============================================================ */
+function navigate(page,event,params){
+  if(event){ event.preventDefault(); }
+  let routeStr = page;
+  if(params && params.id){ routeStr = page+":"+params.id; }
+  if(location.hash === "#"+routeStr){
+    // same hash — no hashchange will fire, render explicitly
+    showPage(routeStr);
+  } else {
+    // change hash — hashchange handler will call showPage
+    location.hash = routeStr;
+  }
+  // close mobile menu if open
+  document.body.classList.remove('menu-open');
+}
+
+function showPage(routeStr){
+  const [page,id] = (routeStr||"home").split(":");
+  if(!PAGES.includes(page)){ return showPage("home"); }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l=>{
+    l.classList.toggle('active', l.dataset.route===page);
+  });
+  const target = document.getElementById('pg-'+page);
+  if(target){ target.classList.add('active'); }
+  if(page==="product" && id){ renderProduct(parseInt(id,10)); }
+  if(page==="article" && id){ renderArticle(id); }
+  if(page==="shop"){ renderShop(); }
+  if(page==="articles"){ renderArticles(); }
+  if(page==="cart"){ renderCart(); }
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+window.addEventListener('hashchange',()=>{
+  const r = (location.hash||"#home").replace("#","");
+  showPage(r);
+});
+
+/* ============================================================
+   RENDERERS
+============================================================ */
+function fmtPrice(p){
+  return "$"+p.toFixed(2).replace(/\.00$/,'.00');
+}
+
+function categoryName(key){
+  const c = CATEGORIES.find(c=>c.key===key);
+  return c?c.name:key;
+}
+
+function productCard(p){
+  const isGift = p.category==="giftcard";
+  const priceText = isGift ? `From $${p.priceFrom}` : fmtPrice(p.price);
+  const btnText = isGift ? "Select Amount" : "Add to Cart";
+  return `
+    <div class="product-card" onclick="navigate('product',event,{id:${p.id}})">
+      <div class="product-card-img"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0.4'"></div>
+      <div class="product-card-body">
+        <div class="product-card-cat">${categoryName(p.category)}</div>
+        <div class="product-card-name">${p.name}</div>
+        <div class="product-card-price">${priceText}</div>
+      </div>
+      <div class="product-card-foot">
+        <button class="add-to-cart-btn" onclick="event.stopPropagation();${isGift?`navigate('product',event,{id:${p.id}})`:`addToCartFromCard(event,${p.id})`}">${btnText}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderHome(){
+  const featured = PRODUCTS.filter(p=>p.category!=="giftcard").slice(0,10);
+  document.getElementById('featuredScroller').innerHTML = featured.map(productCard).join('');
+
+  const giftcards = PRODUCTS.filter(p=>p.category==="giftcard");
+  document.getElementById('giftcardScroller').innerHTML = giftcards.map(productCard).join('');
+
+  const counts = CATEGORIES.map(c=>({...c, count: PRODUCTS.filter(p=>p.category===c.key).length}));
+  const catCardsHTML = counts.map(c=>`
+    <div class="cat-card" onclick="navigate('shop',event);setShopCategory('${c.key}')">
+      <div class="cat-name">${c.name}</div>
+      <div class="cat-count">${c.count} products</div>
+    </div>
+  `).join('');
+  document.getElementById('catGrid').innerHTML = catCardsHTML;
+
+  const blogCards = ARTICLES.slice(0,3).map(articleCard).join('');
+  document.getElementById('blogPreview').innerHTML = blogCards;
+}
+
+function renderShop(){
+  const grid = document.getElementById('shopGrid');
+  if(!grid) return;
+  let list = activeShopCat==="all" ? PRODUCTS.slice() : PRODUCTS.filter(p=>p.category===activeShopCat);
+  const sort = document.getElementById('sortSel') ? document.getElementById('sortSel').value : "featured";
+  if(sort==="price-asc"){ list.sort((a,b)=>(a.price||a.priceFrom)-(b.price||b.priceFrom)); }
+  else if(sort==="price-desc"){ list.sort((a,b)=>(b.price||b.priceFrom)-(a.price||a.priceFrom)); }
+  else if(sort==="name"){ list.sort((a,b)=>a.name.localeCompare(b.name)); }
+  grid.innerHTML = list.map(productCard).join('');
+  document.querySelectorAll('#shopTabs .filter-tab').forEach(t=>{
+    t.classList.toggle('active', t.dataset.cat===activeShopCat);
+  });
+}
+
+function setShopCategory(cat){
+  activeShopCat = cat;
+  renderShop();
+}
+
+document.addEventListener('click',e=>{
+  const tab = e.target.closest('#shopTabs .filter-tab');
+  if(tab){ setShopCategory(tab.dataset.cat); }
+  const atab = e.target.closest('#articleTabs .filter-tab');
+  if(atab){ activeArticleTag = atab.dataset.tag; renderArticles(); }
+});
+
+function renderProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p){ return navigate('shop'); }
+  currentProductId = id;
+  const isGift = p.category==="giftcard";
+  const initialDenom = isGift ? p.denominations[1] : null;
+  const priceText = isGift ? `$${initialDenom}.00` : fmtPrice(p.price);
+
+  const denomHTML = isGift ? `
+    <div class="qty-label" style="margin-bottom:10px">Select Amount</div>
+    <div class="denom-row" id="denomRow">
+      ${p.denominations.map((d,i)=>`<button class="denom-pill ${d===initialDenom?'active':''}" data-denom="${d}" onclick="selectDenom(${d})">$${d}</button>`).join('')}
+    </div>
+  ` : '';
+
+  const detailsList = Object.entries(p.details||{}).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+
+  document.getElementById('productContainer').innerHTML = `
+    <div class="breadcrumb">
+      <a href="#home" onclick="navigate('home',event)">Home</a> /
+      <a href="#shop" onclick="navigate('shop',event)">Shop</a> /
+      <span style="color:var(--ink)">${p.name}</span>
+    </div>
+    <div class="product-grid">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.name}">
+      </div>
+      <div class="product-detail">
+        <div class="section-label">${categoryName(p.category)}</div>
+        <h1>${p.name}</h1>
+        <div class="product-price" id="prodPrice">${priceText}</div>
+        ${denomHTML}
+        <div class="product-divider"></div>
+        <p class="product-desc">${p.desc}</p>
+        ${!isGift ? `
+        <div class="qty-row">
+          <span class="qty-label">Quantity</span>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="adjustQty(-1)">−</button>
+            <input class="qty-input" id="qtyInput" type="text" value="1" readonly>
+            <button class="qty-btn" onclick="adjustQty(1)">+</button>
+          </div>
+        </div>` : ''}
+        <div class="product-add">
+          <button class="btn btn-primary" id="addBtn" onclick="addCurrentToCart()">${isGift?'Add Gift Card to Cart':'Add to Cart'}</button>
+        </div>
+        <a href="#shop" class="back-link" onclick="navigate('shop',event)">← Back to Shop</a>
+      </div>
+    </div>
+    <div class="product-tabs">
+      <div class="tabs-nav">
+        <div class="tab-btn active" data-tab="desc">Description</div>
+        <div class="tab-btn" data-tab="details">Details</div>
+        <div class="tab-btn" data-tab="returns">Returns</div>
+      </div>
+      <div class="tab-pane active" data-pane="desc">
+        <p>${p.desc}</p>
+        <p>${tabExpansion(p)}</p>
+      </div>
+      <div class="tab-pane" data-pane="details">
+        <dl>${detailsList}</dl>
+      </div>
+      <div class="tab-pane" data-pane="returns">
+        <p>Items may be returned within 30 days of delivery in original condition. Contact <a href="mailto:info@gourmetmarketplace.co" style="color:var(--green);text-decoration:underline">info@gourmetmarketplace.co</a> to initiate a return. Perishable goods, gift cards, and clearance items are non-refundable. See our full <a href="#returns" onclick="navigate('returns',event)" style="color:var(--green);text-decoration:underline">returns policy</a> for details.</p>
+      </div>
+    </div>
+    <div class="related">
+      <h2>You might also like</h2>
+      <div class="shop-grid" style="padding:0">
+        ${PRODUCTS.filter(x=>x.category===p.category && x.id!==p.id).slice(0,4).map(productCard).join('')}
+      </div>
+    </div>
+  `;
+
+  document.querySelectorAll('#pg-product .tab-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('#pg-product .tab-btn').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('#pg-product .tab-pane').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.querySelector(`#pg-product .tab-pane[data-pane="${b.dataset.tab}"]`).classList.add('active');
+    });
+  });
+}
+
+function tabExpansion(p){
+  const map = {
+    "hot-sauce":"All Trejo's Hot Sauces are made in small batches in California using vine-ripened peppers and apple cider vinegar. No high-fructose corn syrup, no thickeners, no preservatives beyond what naturally occurs.",
+    "energy":"Cans are shipped chilled and arrive ready to refrigerate. Best consumed cold within 12 months of the date stamped on the bottom.",
+    "coffee-tea":"Stored in food-grade resealable packaging with a one-way valve. Best within 6 months of roast date for whole-bean coffee, 2 weeks for ground.",
+    "health":"Third-party tested and certified for purity and potency. Refill packs are designed to work with reusable container systems to reduce packaging waste.",
+    "pantry":"Shelf stable. Store in a cool, dry place. Once opened, refer to the label for refrigeration recommendations.",
+    "giftcard":"Delivered electronically by email within 24 hours of purchase. Codes never expire. Can be combined across multiple orders. No fees, no hidden charges."
+  };
+  return map[p.category] || "";
+}
+
+let currentQty = 1;
+let currentDenom = null;
+
+function adjustQty(delta){
+  currentQty = Math.max(1, currentQty + delta);
+  const el = document.getElementById('qtyInput');
+  if(el) el.value = currentQty;
+}
+function selectDenom(d){
+  currentDenom = d;
+  document.querySelectorAll('#denomRow .denom-pill').forEach(p=>{
+    p.classList.toggle('active', parseInt(p.dataset.denom,10)===d);
+  });
+  document.getElementById('prodPrice').textContent = "$"+d.toFixed(2);
+}
+function addCurrentToCart(){
+  const p = PRODUCTS.find(x=>x.id===currentProductId);
+  if(!p) return;
+  if(p.category==="giftcard"){
+    const denom = currentDenom || p.denominations[1];
+    addToCart(p.id, 1, denom);
+  } else {
+    addToCart(p.id, currentQty);
+  }
+  const btn = document.getElementById('addBtn');
+  if(btn){
+    const old = btn.textContent;
+    btn.textContent = "Added";
+    btn.disabled = true;
+    setTimeout(()=>{ btn.textContent = old; btn.disabled = false; }, 1500);
+  }
+  currentQty = 1;
+  currentDenom = null;
+  const qi = document.getElementById('qtyInput');
+  if(qi) qi.value = 1;
+}
+
+/* ============================================================
+   ARTICLES
+============================================================ */
+function articleCard(a){
+  return `
+    <div class="blog-card" onclick="navigate('article',event,{id:'${a.id}'})">
+      <div class="blog-img" style="background-image:url(${a.img})"></div>
+      <div class="blog-tag">${a.tag}</div>
+      <div class="blog-title">${a.title}</div>
+      <div class="blog-excerpt">${a.excerpt}</div>
+      <div class="blog-meta">
+        <span class="blog-date">${a.date}</span>
+        <span class="blog-read">Read article →</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderArticles(){
+  const grid = document.getElementById('articlesGrid');
+  if(!grid) return;
+  const list = activeArticleTag==="all" ? ARTICLES : ARTICLES.filter(a=>a.tag===activeArticleTag);
+  grid.innerHTML = list.map(articleCard).join('');
+  document.querySelectorAll('#articleTabs .filter-tab').forEach(t=>{
+    t.classList.toggle('active', t.dataset.tag===activeArticleTag);
+  });
+}
+
+function renderArticle(id){
+  const a = ARTICLES.find(x=>x.id===id);
+  if(!a) return navigate('articles');
+  currentArticleId = id;
+  document.getElementById('articleContainer').innerHTML = `
+    <a href="#articles" class="article-back" onclick="navigate('articles',event)">← Back to Articles</a>
+    <div class="article-hero" style="background-image:url(${a.img})"></div>
+    <div class="article-meta-row">
+      <span class="article-tag">${a.tag}</span>
+      <span class="article-date">${a.date}</span>
+    </div>
+    <h1>${a.title}</h1>
+    <div class="article-body">
+      ${a.body.map(p=>`<p>${p}</p>`).join('')}
+    </div>
+  `;
+  const related = ARTICLES.filter(x=>x.id!==id).slice(0,3);
+  document.getElementById('articleRelated').innerHTML = `
+    <h2>More from the Journal</h2>
+    <div class="blog-grid">${related.map(articleCard).join('')}</div>
+  `;
+}
+
+/* ============================================================
+   CART
+============================================================ */
+function addToCartFromCard(event, productId){
+  event.stopPropagation();
+  const btn = event.currentTarget;
+  if(btn.disabled) return;
+  addToCart(productId);
+  const original = btn.textContent;
+  btn.textContent = "Added";
+  btn.disabled = true;
+  setTimeout(()=>{ btn.textContent = original; btn.disabled = false; }, 1500);
+}
+
+function addToCart(productId, qty=1, denomination=null){
+  const p = PRODUCTS.find(x=>x.id===productId);
+  if(!p) return;
+  const existing = cart.find(i=>i.product.id===productId && i.denomination===denomination);
+  if(existing){ existing.quantity += qty; }
+  else { cart.push({product:p, quantity:qty, denomination:denomination}); }
+  updateCartBadge();
+  showToast(p.category==="giftcard" ? "Gift card added to cart" : "Added to cart");
+}
+
+function removeFromCart(idx){
+  cart.splice(idx,1);
+  updateCartBadge();
+  renderCart();
+}
+
+function updateCartItemQty(idx,delta){
+  cart[idx].quantity = Math.max(1, cart[idx].quantity + delta);
+  updateCartBadge();
+  renderCart();
+}
+
+function cartItemPrice(item){
+  if(item.denomination!=null) return item.denomination;
+  return item.product.price;
+}
+
+function updateCartBadge(){
+  const total = cart.reduce((s,i)=>s+i.quantity,0);
+  const b = document.getElementById('cartBadge');
+  b.textContent = total;
+  b.style.display = total>0 ? 'flex' : 'none';
+}
+
+function renderCart(){
+  const wrap = document.getElementById('cartPage');
+  if(!wrap) return;
+  if(cart.length===0){
+    wrap.innerHTML = `
+      <div class="cart-empty">
+        <h2>Your cart is empty.</h2>
+        <p>Nothing added yet. Browse our shelves and find something good.</p>
+        <a href="#shop" onclick="navigate('shop',event)">Browse the Shop →</a>
+      </div>
+    `;
+    return;
+  }
+  const subtotal = cart.reduce((s,i)=>s + cartItemPrice(i)*i.quantity, 0);
+  const itemsCount = cart.reduce((s,i)=>s+i.quantity,0);
+  const itemRows = cart.map((item,idx)=>{
+    const p = item.product;
+    const unit = cartItemPrice(item);
+    const lineTotal = unit * item.quantity;
+    return `
+      <div class="cart-item">
+        <div class="cart-item-img"><img src="${p.img}" alt="${p.name}"></div>
+        <div>
+          <div class="cart-item-cat">${categoryName(p.category)}${item.denomination?` · $${item.denomination} value`:''}</div>
+          <div class="cart-item-name">${p.name}</div>
+          <div class="cart-item-controls" style="margin-top:8px">
+            <div class="qty-control">
+              <button class="qty-btn" onclick="updateCartItemQty(${idx},-1)">−</button>
+              <input class="qty-input" type="text" value="${item.quantity}" readonly>
+              <button class="qty-btn" onclick="updateCartItemQty(${idx},1)">+</button>
+            </div>
+            <span class="cart-remove" onclick="removeFromCart(${idx})">Remove</span>
+          </div>
+        </div>
+        <div class="cart-item-price">$${lineTotal.toFixed(2)}</div>
+      </div>
+    `;
+  }).join('');
+  wrap.innerHTML = `
+    <div class="cart-grid">
+      <div>
+        <div class="cart-list-head">
+          <h2>Your Cart</h2>
+          <span class="count">${itemsCount} item${itemsCount===1?'':'s'}</span>
+        </div>
+        <div>${itemRows}</div>
+      </div>
+      <aside class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="cart-line"><span>Subtotal (${itemsCount} item${itemsCount===1?'':'s'})</span><span>$${subtotal.toFixed(2)}</span></div>
+        <div class="cart-line"><span>Shipping</span><span>${subtotal>=75?"Free":"Calculated at next step"}</span></div>
+        <div class="cart-line"><span>Tax</span><span>Calculated at next step</span></div>
+        <div class="cart-total"><span>Total</span><span>$${subtotal.toFixed(2)}</span></div>
+        <div class="cart-info-box">
+          Our team will contact you within 24 hours to confirm your order and arrange payment.
+        </div>
+        <button class="btn btn-primary btn-block" onclick="placeOrder()">Place Order</button>
+        <p class="cart-disclaimer">No payment is taken at this stage.</p>
+      </aside>
+    </div>
+  `;
+}
+
+function placeOrder(){
+  if(cart.length===0) return;
+  const ref = "GM-"+Math.floor(10000+Math.random()*89999);
+  document.getElementById('orderRef').textContent = "Reference: #"+ref;
+  document.getElementById('orderModal').classList.add('show');
+}
+
+function closeOrderModal(){
+  document.getElementById('orderModal').classList.remove('show');
+  cart = [];
+  updateCartBadge();
+  navigate('shop');
+}
+
+document.getElementById('orderModal').addEventListener('click',e=>{
+  if(e.target.id==='orderModal'){ closeOrderModal(); }
+});
+
+/* ============================================================
+   CONTACT / TOAST
+============================================================ */
+function submitContact(e){
+  e.preventDefault();
+  e.target.reset();
+  document.getElementById('contactForm').hidden = true;
+  document.getElementById('contactSuccess').hidden = false;
+}
+function resetContact(e){
+  if(e){ e.preventDefault(); }
+  document.getElementById('contactSuccess').hidden = true;
+  document.getElementById('contactForm').hidden = false;
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+renderHome();
+const initial = (location.hash||"#home").replace("#","") || "home";
+showPage(initial);
+updateCartBadge();
+</script>
+</body>
+</html>
