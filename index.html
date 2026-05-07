@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!--
-GOURMET MARKETPLACE — SHOPIFY DEV HANDOFF
+GOURMET MARKETPLACE / SHOPIFY DEV HANDOFF
 Rebuild this prototype 1:1 in Shopify using Dawn as the base theme. No Divi, Salient, or Elementor.
-Product images: currently loading from gourmetmarketplace.co CDN — re-upload all to Shopify CDN before launch.
-Hero and editorial images: currently Unsplash — replace with original photography or licensed stock.
+Product images: currently loading from gourmetmarketplace.co CDN. Re-upload all to Shopify CDN before launch.
+Hero and editorial images: currently Unsplash. Replace with original photography or licensed stock.
 Cart/checkout: replace "Place Order" modal with Shopify native checkout.
 Slack webhook: Shopify Admin > Settings > Notifications > Webhooks > Order Created.
 Company: Gourmet Marketplace LLC · 1422 S Tryon Street Suite 300 Charlotte NC 28203 · info@gourmetmarketplace.co · 1(347)986-1258
@@ -13,7 +13,7 @@ Company: Gourmet Marketplace LLC · 1422 S Tryon Street Suite 300 Charlotte NC 2
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gourmet Marketplace – Fresh Finds. Global Flavors.</title>
-<meta name="description" content="Hand-selected ingredients, specialty goods, and chef-driven staples — shipped from Charlotte, NC. Hot sauces, coffee, tea, energy drinks, supplements, and grocery gift cards.">
+<meta name="description" content="Hand-selected ingredients, specialty goods, and chef-driven staples, shipped from Charlotte, NC. Hot sauces, coffee, tea, energy drinks, supplements, and grocery gift cards.">
 <link rel="canonical" href="https://gourmetmarketplace.co/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,8 +86,6 @@ main{min-height:60vh}
 
 /* Generic */
 .container{max-width:1280px;margin:0 auto;padding:0 32px}
-.section-label{display:inline-flex;align-items:center;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);border-left:3px solid var(--orange);padding-left:8px;margin-bottom:14px}
-.section-label.on-dark{color:rgba(255,255,255,.65)}
 h1,h2,h3{line-height:1.15;color:var(--ink)}
 h2.section-title{font-family:var(--serif);font-size:42px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px}
 h2.section-title.on-dark{color:#fff}
@@ -107,14 +105,14 @@ h2.section-title.on-dark{color:#fff}
 .btn-orange{background:var(--orange);color:#fff}
 .btn-orange:hover{background:#cc511a}
 
-/* HOME — hero */
+/* HOME hero */
 .hero{position:relative;min-height:580px;display:flex;align-items:center;color:#fff;overflow:hidden;background:#1a4731}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-image:url(https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&h=700&fit=crop&q=80)}
-.hero-bg::after{content:"";position:absolute;inset:0;background:rgba(26,71,49,.55)}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-image:url(https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&h=900&fit=crop&q=80)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,28,20,.78) 0%,rgba(15,28,20,.62) 55%,rgba(15,28,20,.35) 100%)}
 .hero-inner{position:relative;max-width:680px;padding:80px 32px}
-.hero .breadcrumb{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:20px}
-.hero h1{font-family:var(--serif);font-size:64px;font-weight:500;line-height:1.05;letter-spacing:-.015em;margin-bottom:20px}
-.hero p.lead{font-size:17px;color:rgba(255,255,255,.82);max-width:560px;line-height:1.55;margin-bottom:32px}
+.hero .breadcrumb{font-size:13px;font-weight:500;color:rgba(255,255,255,.78);margin-bottom:20px;font-style:italic}
+.hero h1{font-family:var(--serif);font-size:64px;font-weight:600;line-height:1.05;letter-spacing:-.015em;margin-bottom:20px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.15)}
+.hero p.lead{font-size:17px;color:rgba(255,255,255,.95);max-width:560px;line-height:1.55;margin-bottom:32px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 
 /* Featured strip */
@@ -135,7 +133,7 @@ h2.section-title.on-dark{color:#fff}
 .product-card-img{aspect-ratio:1/1;background:var(--bg-soft);display:block;overflow:hidden}
 .product-card-img img{width:100%;height:100%;object-fit:cover;background:#fff}
 .product-card-body{padding:14px 14px 14px;display:flex;flex-direction:column;gap:6px}
-.product-card-cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.product-card-cat{font-size:12px;color:var(--ink-3);font-weight:500;font-style:italic}
 .product-card-name{font-size:14px;font-weight:600;color:var(--ink);line-height:1.35;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .product-card-price{font-size:16px;font-weight:700;color:var(--green);margin-top:auto}
 .product-card-foot{padding:0 14px 14px}
@@ -167,7 +165,7 @@ h2.section-title.on-dark{color:#fff}
 .blog-card:hover{border-bottom-color:var(--green)}
 .blog-card:hover .blog-title{color:var(--green)}
 .blog-img{aspect-ratio:7/4;background-size:cover;background-position:center;border-radius:4px;margin-bottom:16px}
-.blog-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:8px}
+.blog-tag{font-size:13px;color:var(--orange);font-weight:500;margin-bottom:8px;font-style:italic}
 .blog-title{font-size:18px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:8px;transition:color .15s ease}
 .blog-excerpt{font-size:14px;color:var(--ink-2);line-height:1.55;margin-bottom:14px}
 .blog-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -177,7 +175,7 @@ h2.section-title.on-dark{color:#fff}
 
 /* Page header banner (shop, articles, about, connect, legal) */
 .page-banner{background:var(--green-deep);padding:48px 0 56px;color:#fff}
-.page-banner .breadcrumb{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.page-banner .breadcrumb{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:14px}
 .page-banner h1{font-family:var(--serif);font-size:52px;font-weight:500;letter-spacing:-.012em;line-height:1.05;margin-bottom:8px;color:#fff}
 .page-banner .sub{font-size:15px;color:rgba(255,255,255,.72);max-width:560px;line-height:1.5}
 
@@ -262,8 +260,8 @@ h2.section-title.on-dark{color:#fff}
 .article-back:hover{border-bottom-color:var(--ink-3);color:var(--ink-2)}
 .article-hero{aspect-ratio:21/9;max-height:420px;border-radius:4px;background-size:cover;background-position:center;margin-bottom:32px}
 .article-meta-row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
-.article-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);font-weight:600}
-.article-date{font-size:12px;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase}
+.article-tag{font-size:14px;color:var(--orange);font-weight:500;font-style:italic}
+.article-date{font-size:13px;color:var(--ink-3)}
 .article-page h1{font-family:var(--serif);font-size:48px;font-weight:500;line-height:1.15;letter-spacing:-.012em;max-width:840px;margin-bottom:24px}
 .article-body{max-width:720px;font-size:16px;line-height:1.8;color:var(--ink-2)}
 .article-body p+p{margin-top:18px}
@@ -308,7 +306,7 @@ h2.section-title.on-dark{color:#fff}
 .cart-item-img{width:80px;height:80px;border-radius:4px;border:1px solid var(--line);overflow:hidden;background:#fff}
 .cart-item-img img{width:100%;height:100%;object-fit:cover}
 .cart-item-name{font-size:15px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:4px}
-.cart-item-cat{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.cart-item-cat{font-size:12px;color:var(--ink-3);font-style:italic;margin-bottom:6px}
 .cart-item-price{font-size:15px;font-weight:700;color:var(--green)}
 .cart-item-controls{display:flex;align-items:center;gap:12px}
 .cart-item-controls .qty-control{height:34px}
@@ -412,7 +410,7 @@ h2.section-title.on-dark{color:#fff}
 
 <!-- Announcement -->
 <div class="announce" id="announce">
-  <span>Free shipping on orders over $75 — use code <strong>GOURMET</strong> at checkout.</span>
+  <span>Free shipping on orders over $75. Use code <strong>GOURMET</strong> at checkout.</span>
   <button class="announce-close" onclick="dismissAnnounce()" aria-label="Dismiss">&times;</button>
 </div>
 
@@ -455,7 +453,7 @@ h2.section-title.on-dark{color:#fff}
     <div class="hero-inner">
       <div class="breadcrumb">Gourmet Marketplace · Charlotte, NC</div>
       <h1>Fresh Finds. Global Flavors. Everyday Gourmet.</h1>
-      <p class="lead">Hand-selected ingredients, specialty goods, and chef-driven staples — shipped to your door from Charlotte, NC.</p>
+      <p class="lead">Hand-selected ingredients, specialty goods, and chef-driven staples, shipped to your door from Charlotte, NC.</p>
       <div class="hero-actions">
         <a href="#shop" class="btn btn-primary" onclick="navigate('shop',event)">Shop Now</a>
         <a href="#about" class="btn btn-outline-light" onclick="navigate('about',event)">Our Story</a>
@@ -467,7 +465,6 @@ h2.section-title.on-dark{color:#fff}
     <div class="container">
       <div class="featured-head">
         <div class="featured-head-left">
-          <div class="section-label">Gourmet Goods, Delivered</div>
           <h2 class="section-title">Fresh from the Marketplace</h2>
         </div>
         <a href="#shop" class="featured-link" onclick="navigate('shop',event)">See all 68 products →</a>
@@ -478,7 +475,6 @@ h2.section-title.on-dark{color:#fff}
 
   <section class="categories">
     <div class="container">
-      <div class="section-label">By Category</div>
       <h2 class="section-title">Shop by Category</h2>
       <p class="section-sub">Six tightly edited categories. Each product is here because it earns its shelf space.</p>
       <div class="cat-grid" id="catGrid"></div>
@@ -489,9 +485,8 @@ h2.section-title.on-dark{color:#fff}
     <div class="container">
       <div class="edit-band-grid">
         <div>
-          <div class="section-label on-dark">Specialty Food Store</div>
           <h2>68 specialty products. One place.</h2>
-          <p>From Danny Trejo's hot sauces to algae-derived omega-3 supplements — Gourmet Marketplace stocks products worth buying, from producers worth knowing about. Based in Charlotte, NC. Ships nationwide.</p>
+          <p>From Danny Trejo's hot sauces to algae-derived omega-3 supplements, Gourmet Marketplace stocks products worth buying, from producers worth knowing about. Based in Charlotte, NC. Ships nationwide.</p>
           <a href="#shop" class="btn btn-outline-light" onclick="navigate('shop',event)">Browse the Shop</a>
         </div>
         <div class="edit-band-img" aria-hidden="true"></div>
@@ -503,7 +498,6 @@ h2.section-title.on-dark{color:#fff}
     <div class="container">
       <div class="featured-head">
         <div class="featured-head-left">
-          <div class="section-label">Gift Cards</div>
           <h2 class="section-title">Grocery Store Gift Cards</h2>
           <p class="section-sub">Kroger, Safeway, Instacart, Albertsons, and more. Available from $10 to $500.</p>
         </div>
@@ -516,7 +510,6 @@ h2.section-title.on-dark{color:#fff}
     <div class="container">
       <div class="featured-head">
         <div class="featured-head-left">
-          <div class="section-label">The Journal</div>
           <h2 class="section-title">The Gourmet Journal</h2>
           <p class="section-sub">Buying guides, deals, and notes from the Charlotte specialty food scene.</p>
         </div>
@@ -533,7 +526,7 @@ h2.section-title.on-dark{color:#fff}
     <div class="container">
       <div class="breadcrumb">Home / Shop</div>
       <h1>The Gourmet Shop</h1>
-      <p class="sub">68 products — hot sauces, energy drinks, coffee, health, pantry staples, and grocery gift cards.</p>
+      <p class="sub">68 products spanning hot sauces, energy drinks, coffee, health, pantry staples, and grocery gift cards.</p>
     </div>
   </section>
   <div class="filter-bar">
@@ -583,9 +576,8 @@ h2.section-title.on-dark{color:#fff}
     <div class="container">
       <div class="about-grid">
         <div>
-          <div class="section-label">Our Story</div>
           <h2>A grocery store worth shopping.</h2>
-          <p>Gourmet Marketplace is your destination for hand-selected ingredients, specialty goods, and chef-driven staples from around the world. Whether you're stocking your kitchen with premium pantry essentials, searching for the best hot sauce, or finding a gift for a food lover in your life — we bring the best of the specialty food world to one place.</p>
+          <p>Gourmet Marketplace is your destination for hand-selected ingredients, specialty goods, and chef-driven staples from around the world. Whether you're stocking your kitchen with premium pantry essentials, searching for the best hot sauce, or finding a gift for a food lover in your life, we bring the best of the specialty food world to one place.</p>
           <p>Based in Charlotte, NC. Shipping nationwide.</p>
           <div class="about-meta">
             1422 S Tryon Street, Suite 300<br>
@@ -601,10 +593,9 @@ h2.section-title.on-dark{color:#fff}
   <section class="about-text-block">
     <div class="container">
       <div class="inner">
-        <div class="section-label">What's on the shelves</div>
         <h2>What we stock and why.</h2>
         <p>Our range covers hot sauces from Danny Trejo's brand, premium loose-leaf tea and specialty coffee, high-protein snacks and supplements, bulk gourmet popcorn, and grocery gift cards from Kroger, Safeway, Instacart, and more.</p>
-        <p>Every product is selected because it's genuinely good — not because it fills a category quota. We stock 68 products and we know every one of them.</p>
+        <p>Every product is selected because it's genuinely good, not because it fills a category quota. We stock 68 products and we know every one of them.</p>
         <p>If you have a question about a product, sourcing, or how something is made, write to us. The same person who picks the products answers the email.</p>
       </div>
     </div>
@@ -743,7 +734,7 @@ h2.section-title.on-dark{color:#fff}
     <h2>4. Returns</h2>
     <p>Items may be returned within 30 days of delivery in original, unopened condition. Perishable goods, gift cards, and clearance items are non-refundable. See our Returns Policy for full details.</p>
     <h2>5. Intellectual Property</h2>
-    <p>All content on this site — including text, photography, logos, and product copy — is the property of Gourmet Marketplace LLC or its content suppliers and is protected by US and international copyright law.</p>
+    <p>All content on this site, including text, photography, logos, and product copy, is the property of Gourmet Marketplace LLC or its content suppliers and is protected by US and international copyright law.</p>
     <h2>6. Limitation of Liability</h2>
     <p>To the fullest extent permitted by law, Gourmet Marketplace LLC will not be liable for indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of the site.</p>
     <h2>7. Governing Law</h2>
@@ -767,20 +758,20 @@ h2.section-title.on-dark{color:#fff}
     <h2>Information We Collect</h2>
     <ul>
       <li>Contact details (name, email, shipping and billing address, phone number) provided when you place an order or sign up for our newsletter.</li>
-      <li>Payment information processed by our payment provider — we do not store full card numbers.</li>
+      <li>Payment information processed by our payment provider. We do not store full card numbers.</li>
       <li>Browsing data such as IP address, device type, and pages viewed, collected via cookies and analytics.</li>
     </ul>
     <h2>How We Use Your Information</h2>
     <ul>
       <li>To process and fulfill your orders.</li>
       <li>To send order confirmations, shipping updates, and customer service communication.</li>
-      <li>To send newsletters and marketing — only if you opt in. You can unsubscribe at any time.</li>
+      <li>To send newsletters and marketing, but only if you opt in. You can unsubscribe at any time.</li>
       <li>To improve the site's performance and user experience.</li>
     </ul>
     <h2>Cookies</h2>
     <p>We use cookies to keep your cart populated between sessions, to remember your preferences, and to gather aggregated analytics. You can disable cookies in your browser settings, though some site features may not work as expected.</p>
     <h2>Sharing</h2>
-    <p>We do not sell your personal information. We share data only with service providers who help us operate the business — payment processors, shipping carriers, and email platforms — and only the minimum information they need.</p>
+    <p>We do not sell your personal information. We share data only with service providers who help us operate the business, like payment processors, shipping carriers, and email platforms, and only the minimum information they need.</p>
     <h2>Your Rights</h2>
     <p>You can request a copy, correction, or deletion of your personal data at any time by emailing <a href="mailto:info@gourmetmarketplace.co" style="color:var(--green);text-decoration:underline">info@gourmetmarketplace.co</a>.</p>
     <h2>Children</h2>
@@ -806,7 +797,7 @@ h2.section-title.on-dark{color:#fff}
     <h2>What Can Be Returned</h2>
     <ul>
       <li>Unopened, shelf-stable goods in original packaging.</li>
-      <li>Damaged or defective items — please contact us within 7 days of delivery so we can replace or refund.</li>
+      <li>Damaged or defective items: please contact us within 7 days of delivery so we can replace or refund.</li>
     </ul>
     <h2>What Cannot Be Returned</h2>
     <ul>
@@ -860,7 +851,7 @@ h2.section-title.on-dark{color:#fff}
           <span class="brand-word">Gourmet <i>Marketplace</i></span>
         </a>
         <p class="footer-tag">Specialty food and grocery gift cards. Charlotte, NC.</p>
-        <form class="footer-newsletter" onsubmit="event.preventDefault();showToast('Subscribed — check your inbox.');this.reset()">
+        <form class="footer-newsletter" onsubmit="event.preventDefault();showToast('Subscribed. Check your inbox.');this.reset()">
           <input type="email" placeholder="your@email.com" required>
           <button type="submit">Subscribe</button>
         </form>
@@ -920,54 +911,54 @@ h2.section-title.on-dark{color:#fff}
 ============================================================ */
 const PRODUCTS = [
   // HOT SAUCE & CONDIMENTS
-  {id:1,name:"Trejo's Hot Sauce – Original – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Original_TrejosHotSauce_Single_01_Full-300x300.jpg",desc:"Danny Trejo's signature medium-heat hot sauce. Cayenne pepper base with garlic and apple cider vinegar. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Medium"}},
-  {id:2,name:"Trejo's Hot Sauce – Habanero – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/HabaneroHotSauce_TrejosHotSauce_WhiteBG_01_3141258a-f290-478d-8cf9-82181765e656-300x300.jpg",desc:"High-heat habanero sauce with tropical fruit notes. Bold, fruity, and seriously hot. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Hot"}},
-  {id:3,name:"Trejo's Hot Sauce – Jalapeno – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Jalapeno_TrejosHotSauce_WhiteBG_01-300x300.jpg",desc:"Fresh jalapeno flavor with a mild to medium heat. Bright and versatile — works on everything. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Mild–Medium"}},
-  {id:4,name:"Trejo's Hot Sauce – Trinidad Moruga Scorpion – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/TrinidadMorugaScorpionPepper_TrejosHotSauce_WhiteBG_02_1x1_Web_825ba499-18d0-4393-8657-53ada2eb6444-300x300.jpg",desc:"Extreme heat from one of the world's hottest peppers. Not for the faint-hearted. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Extreme"}},
-  {id:5,name:"Trejo's Hot Sauce – Original – 12 Pack Case",price:145.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/TT_HotSauce12_800-300x300.jpg",desc:"A full case of 12 Original Trejo's Hot Sauce bottles. Stock the kitchen or share with friends.",details:{Format:"Case",Size:"12 × 5 oz",Origin:"USA",Heat:"Medium"}},
-  {id:6,name:"Trejo's Hot Honey – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Single-Bottle-300x300.jpg",desc:"Raw honey infused with chili peppers. Drizzle on pizza, cheese boards, fried chicken, or anything that needs a sweet-heat finish. 6oz.",details:{Format:"Bottle",Size:"6 oz",Origin:"USA",Heat:"Mild"}},
-  {id:7,name:"Trejo's Hot Honey – Six Pack Case",price:75.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/6pack-300x300.jpg",desc:"Six bottles of Trejo's Hot Honey. Best value for hot honey regulars or gift buyers.",details:{Format:"Case",Size:"6 × 6 oz",Origin:"USA",Heat:"Mild"}},
+  {id:1,name:"Trejo's Hot Sauce – Original – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Original_TrejosHotSauce_Single_01_Full.jpg",desc:"Cayenne pepper, garlic, and apple cider vinegar in a 5oz bottle. Trejo's signature sauce runs medium-heat, more flavor than burn. Works on tacos, eggs, grain bowls, and pizza. A bottle lasts about three weeks in a working kitchen.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Medium"}},
+  {id:2,name:"Trejo's Hot Sauce – Habanero – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/HabaneroHotSauce_TrejosHotSauce_WhiteBG_01_3141258a-f290-478d-8cf9-82181765e656.jpg",desc:"Habanero carries tropical fruit notes the cayenne sauces don't. This 5oz bottle leans bold and sweet-hot, hot enough to register without flattening the food underneath. Pair with grilled chicken, mango salsa, or anything that benefits from fruity heat.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Hot"}},
+  {id:3,name:"Trejo's Hot Sauce – Jalapeno – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Jalapeno_TrejosHotSauce_WhiteBG_01.jpg",desc:"The mildest sauce in the Trejo lineup. Fresh jalapeno builds a bright, green-pepper flavor with mild to medium heat that won't overpower delicate dishes. Good on tacos, eggs, sandwiches, or as a marinade base. 5oz bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Mild–Medium"}},
+  {id:4,name:"Trejo's Hot Sauce – Trinidad Moruga Scorpion – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/TrinidadMorugaScorpionPepper_TrejosHotSauce_WhiteBG_02_1x1_Web_825ba499-18d0-4393-8657-53ada2eb6444.jpg",desc:"Heat without restraint. The Trinidad Moruga Scorpion is among the hottest peppers grown commercially, and this 5oz bottle is built around it. Use sparingly on chili, wings, or as a dare ingredient. Not the everyday bottle.",details:{Format:"Bottle",Size:"5 oz",Origin:"USA",Heat:"Extreme"}},
+  {id:5,name:"Trejo's Hot Sauce – Original – 12 Pack Case",price:145.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/TT_HotSauce12_800.jpg",desc:"Twelve bottles of the Original sauce, sold by the case for households that finish a bottle a week, restaurants stocking the line, or buyers gifting at scale. Same recipe as the single, just twelve at a time. Per-bottle works out to $12.08.",details:{Format:"Case",Size:"12 × 5 oz",Origin:"USA",Heat:"Medium"}},
+  {id:6,name:"Trejo's Hot Honey – Single Bottle",price:15.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Single-Bottle.jpg",desc:"Raw honey infused with chili. Sweet first, hot second. Drizzle on pizza, fried chicken, biscuits, soft cheeses, or anything that wants a sweet-heat finish. 6oz bottle, lasts roughly two months in regular use.",details:{Format:"Bottle",Size:"6 oz",Origin:"USA",Heat:"Mild"}},
+  {id:7,name:"Trejo's Hot Honey – Six Pack Case",price:75.00,category:"hot-sauce",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/6pack.jpg",desc:"Six 6oz bottles of Hot Honey. The bulk option for households that have moved past one bottle, or for gift bundles. Per-bottle works out to $12.50, the best price below the case level.",details:{Format:"Case",Size:"6 × 6 oz",Origin:"USA",Heat:"Mild"}},
 
   // ENERGY
-  {id:8,name:"Alani Nu Energy Drinks – 12 Cans, Electric Tie Dye (Cherry Limeade)",price:28.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AlaniElectric-300x300.jpg",desc:"200mg caffeine, zero sugar, cherry limeade flavor. 12oz cans. Case of 12.",details:{Format:"Case",Size:"12 × 12 oz",Origin:"USA",Caffeine:"200 mg"}},
-  {id:9,name:"Alani Nu Energy Drinks – 12 Cans, Cosmic Stardust",price:28.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AlaniCosmic-300x300.jpg",desc:"200mg caffeine, zero sugar, Cosmic Stardust flavor. Light, slightly tart, very drinkable. Case of 12.",details:{Format:"Case",Size:"12 × 12 oz",Origin:"USA",Caffeine:"200 mg"}},
-  {id:10,name:"3D Energy Drink – 12 Cans, Gold (Pina Colada)",price:23.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Gold-300x300.jpg",desc:"200mg caffeine, zero sugar, tropical pina colada flavor. Clean energy without the crash. Case of 12.",details:{Format:"Case",Size:"12 × 16 oz",Origin:"USA",Caffeine:"200 mg"}},
-  {id:11,name:"MULE 8PK",price:33.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/mule_300-300x300.jpg",desc:"Moscow Mule flavored energy drink. Ginger beer taste, caffeinated, zero alcohol. Pack of 8.",details:{Format:"Pack",Size:"8 cans",Origin:"USA",Caffeine:"160 mg"}},
+  {id:8,name:"Alani Nu Energy Drinks – 12 Cans, Electric Tie Dye (Cherry Limeade)",price:28.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AlaniElectric.jpg",desc:"Twelve 12oz cans of Alani Nu in Electric Tie Dye, a clean cherry-limeade flavor. 200mg caffeine, zero sugar, zero calories. Light and tart enough to drink cold without a chaser. Refrigerate before serving.",details:{Format:"Case",Size:"12 × 12 oz",Origin:"USA",Caffeine:"200 mg"}},
+  {id:9,name:"Alani Nu Energy Drinks – 12 Cans, Cosmic Stardust",price:28.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AlaniCosmic.jpg",desc:"Cosmic Stardust is the fruit-punch end of the Alani lineup, less candy-sweet than the breakfast options. 200mg caffeine, zero sugar. Twelve 12oz cans per case, around $2.42 per can. Drinkable through a 9-to-5.",details:{Format:"Case",Size:"12 × 12 oz",Origin:"USA",Caffeine:"200 mg"}},
+  {id:10,name:"3D Energy Drink – 12 Cans, Gold (Pina Colada)",price:23.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Gold.jpg",desc:"3D's tropical option with a real pina colada profile and 200mg caffeine. Zero sugar, zero crash. Case of twelve 16oz cans. The 3D format is taller than Alani so the case takes a touch more shelf space.",details:{Format:"Case",Size:"12 × 16 oz",Origin:"USA",Caffeine:"200 mg"}},
+  {id:11,name:"MULE 8PK",price:33.99,category:"energy",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/mule_300.jpg",desc:"Eight cans of Moscow Mule flavored energy drink. Ginger beer character with the lime backbone, caffeinated, zero alcohol. Useful when the after-work mule habit needs a working-hours alternative. 160mg caffeine per can.",details:{Format:"Pack",Size:"8 cans",Origin:"USA",Caffeine:"160 mg"}},
 
   // COFFEE & TEA
-  {id:12,name:"Camila's Organic – Ground Coarse – French Press – 2lbs",price:42.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Camilas-2lb-2-300x300.jpg",desc:"Organic single-origin coffee, coarse ground for French press. Rich, smooth, low-acid. 2lb bag.",details:{Format:"Bag",Size:"2 lb",Grind:"Coarse",Roast:"Medium"}},
-  {id:13,name:"Mathilde's French Roast – Ground Medium – Drip – 5lbs",price:88.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Mathildes-5lb-300x300.jpg",desc:"Dark French roast ground for drip coffee makers. Smoky, bold, full body. Office-ready 5lb bag.",details:{Format:"Bag",Size:"5 lb",Grind:"Medium",Roast:"Dark"}},
-  {id:14,name:"Classic Black Tea – 1lb Zip Pouch (Avg. 320 cups)",price:51.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CLASSIC_BLACK-3-300x300.jpg",desc:"Premium loose-leaf black tea. Full-bodied, brisk, and clean. One pound makes approximately 320 cups.",details:{Format:"Zip pouch",Size:"1 lb",Yields:"~320 cups",Origin:"India"}},
-  {id:15,name:"Art of Tea Book – 10 Art of Tea Books",price:293.20,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AOT-Book-Assets-10-Books-300x300.jpg",desc:"A set of 10 beautifully produced Art of Tea guide books. Covers tea history, brewing methods, and tasting notes. Gift-ready.",details:{Format:"Book set",Size:"10 books",Pages:"~180 ea",Type:"Hardcover"}},
+  {id:12,name:"Camila's Organic – Ground Coarse – French Press – 2lbs",price:42.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Camilas-2lb-2.jpg",desc:"Organic single-origin coffee, coarse ground for French press. Smooth body, low acidity, gentle finish. The 2lb bag lasts a two-cup-a-day household roughly three weeks. Flavor falls off after about four weeks open, so seal it tightly.",details:{Format:"Bag",Size:"2 lb",Grind:"Coarse",Roast:"Medium"}},
+  {id:13,name:"Mathilde's French Roast – Ground Medium – Drip – 5lbs",price:88.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Mathildes-5lb.jpg",desc:"Dark roast ground for drip. Smoky, bold, full body. Built for offices and large households at the 5lb size, but works at home for heavy coffee drinkers. About 320 cups per bag, $0.27 per cup brewed.",details:{Format:"Bag",Size:"5 lb",Grind:"Medium",Roast:"Dark"}},
+  {id:14,name:"Classic Black Tea – 1lb Zip Pouch (Avg. 320 cups)",price:51.00,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CLASSIC_BLACK-3.jpg",desc:"Loose-leaf black tea, full-bodied and brisk. The pound yields around 320 cups, which puts each cup at about $0.16. Stored in a resealable food-grade pouch. Best within twelve months of opening.",details:{Format:"Zip pouch",Size:"1 lb",Yields:"~320 cups",Origin:"India"}},
+  {id:15,name:"Art of Tea Book – 10 Art of Tea Books",price:293.20,category:"coffee-tea",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/AOT-Book-Assets-10-Books.jpg",desc:"Ten copies of the Art of Tea guide book. Tea history, brewing methods, regional notes, and tasting calibration. Built for retail bundles, corporate gifts, or anyone wanting a deeper read on the category. About $29.30 per book at this volume.",details:{Format:"Book set",Size:"10 books",Pages:"~180 ea",Type:"Hardcover"}},
 
   // HEALTH & WELLNESS
-  {id:16,name:"Alpha Prime Bites Protein Mini Muffins – 12 Pack, Birthday Cake",price:41.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CPProductPages-2025-01-08T092257.002-300x300.jpg",desc:"High-protein mini muffins with 10g protein each. Birthday cake flavor. 12 individually wrapped muffins per box.",details:{Format:"Box",Size:"12 muffins",Protein:"10 g each",Flavor:"Birthday Cake"}},
-  {id:17,name:"Alpha Prime Bites Protein Mini Muffins – 12 Pack, Chocolate Fudge",price:41.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CPProductPages-2025-01-08T092359.920-300x300.jpg",desc:"High-protein mini muffins, chocolate fudge flavor. 10g protein each. 12 individually wrapped muffins per box.",details:{Format:"Box",Size:"12 muffins",Protein:"10 g each",Flavor:"Chocolate Fudge"}},
-  {id:18,name:"ISOPURE Protein RTD – 12 Bottles, Lemonade",price:47.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/ip-1113518_Image_01-300x300.png",desc:"Ready-to-drink whey protein isolate. 40g protein per bottle, zero carbs, lemonade flavor. Case of 12 bottles.",details:{Format:"Case",Size:"12 bottles",Protein:"40 g per bottle",Flavor:"Lemonade"}},
-  {id:19,name:"Nootropics – Gummies, 2-Pack",price:129.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/10Square-1-300x300.jpg",desc:"Cognitive support gummies with lion's mane, bacopa, and L-theanine. 60 gummies per pack. 2-pack bundle.",details:{Format:"Bundle",Size:"2 × 60 gummies",Active:"Lion's mane, bacopa, L-theanine"}},
-  {id:20,name:"TESTED BY YOU – DHA",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-300x300.png",desc:"Algae-derived DHA omega-3. Clinically tested, third-party verified. 90-day supply.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Algae",Type:"DHA omega-3"}},
-  {id:21,name:"TESTED BY YOU – Prenatal DHA",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-2-300x300.png",desc:"Prenatal DHA formulated for pregnancy and nursing. Algae-derived, mercury-free. 90-day supply.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Algae",Type:"Prenatal DHA"}},
-  {id:22,name:"TESTED BY YOU – Omega-3",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Orlo_RefillPacks_Omega3-300x300.jpg",desc:"High-absorption omega-3 from micro-algae. No fishy aftertaste. 90-day supply in refillable packaging.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Micro-algae",Type:"Omega-3"}},
-  {id:23,name:"TESTED BY YOU – DHA – 6 Packs",price:1980.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-1-300x300.png",desc:"Bulk purchase of 6 x 90-day DHA supplies. Best per-unit price for long-term supplementation or gifting.",details:{Format:"Bulk",Size:"6 × 90-day supply",Source:"Algae",Type:"DHA omega-3"}},
-  {id:24,name:"Peppermint Aromatherapy Packet 25 Count Box – 80 Pack",price:360.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Orlando_health-render-peppermint_ca22b483-bf2f-44a7-bd4d-8743be01276c-1-300x300.jpg",desc:"Single-use peppermint aromatherapy sachets. Used in clinical settings for nausea relief. Box of 25 packets, 80 boxes per case.",details:{Format:"Case",Size:"80 × 25 packets",Use:"Aromatherapy",Origin:"USA"}},
+  {id:16,name:"Alpha Prime Bites Protein Mini Muffins – 12 Pack, Birthday Cake",price:41.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CPProductPages-2025-01-08T092257.002.jpg",desc:"Twelve individually wrapped protein mini muffins in a birthday cake flavor. Each muffin delivers 10g protein and lands closer to a bakery muffin than to a protein bar. Useful for office snack drawers, road trips, and post-workout windows.",details:{Format:"Box",Size:"12 muffins",Protein:"10 g each",Flavor:"Birthday Cake"}},
+  {id:17,name:"Alpha Prime Bites Protein Mini Muffins – 12 Pack, Chocolate Fudge",price:41.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/CPProductPages-2025-01-08T092359.920.jpg",desc:"Same format as the Birthday Cake muffins but with a chocolate fudge profile. Twelve individually wrapped muffins, 10g protein each. Less sweet than the cake variant, more dessert than gym snack. Refrigerate for a denser bite.",details:{Format:"Box",Size:"12 muffins",Protein:"10 g each",Flavor:"Chocolate Fudge"}},
+  {id:18,name:"ISOPURE Protein RTD – 12 Bottles, Lemonade",price:47.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/ip-1113518_Image_01.png",desc:"Whey protein isolate in ready-to-drink form, lemonade flavor. Each 16oz bottle delivers 40g protein with zero carbs and a lactose-free formulation. Twelve bottles per case, around $4 each. Drinks like a sports drink, not a shake.",details:{Format:"Case",Size:"12 bottles",Protein:"40 g per bottle",Flavor:"Lemonade"}},
+  {id:19,name:"Nootropics – Gummies, 2-Pack",price:129.99,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/10Square-1.jpg",desc:"Two 60-count packs of cognitive support gummies. Active ingredients are lion's mane, bacopa monnieri, and L-theanine, dosed for daily use. The 2-pack covers roughly four months at one gummy a day. Watermelon flavor.",details:{Format:"Bundle",Size:"2 × 60 gummies",Active:"Lion's mane, bacopa, L-theanine"}},
+  {id:20,name:"TESTED BY YOU – DHA",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby.png",desc:"Algae-derived DHA omega-3 in the TESTED BY YOU refillable system. 90-day supply per pack. Third-party tested for purity, no fishy aftertaste, mercury-free. Refill model produces less packaging waste than bottle-format omegas.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Algae",Type:"DHA omega-3"}},
+  {id:21,name:"TESTED BY YOU – Prenatal DHA",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-2.png",desc:"Prenatal-formulated DHA designed for pregnancy and nursing. Algae-derived rather than fish-sourced, mercury-free, and dosed for the elevated needs of the third trimester through the first year of nursing. 90-day refill pack.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Algae",Type:"Prenatal DHA"}},
+  {id:22,name:"TESTED BY YOU – Omega-3",price:330.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Orlo_RefillPacks_Omega3.jpg",desc:"High-absorption omega-3 sourced from micro-algae rather than fish. No fishy aftertaste or burping issues. Comes as a 90-day refill, designed to slot into the brand's reusable container system. Third-party tested for purity.",details:{Format:"Refill pack",Size:"90-day supply",Source:"Micro-algae",Type:"Omega-3"}},
+  {id:23,name:"TESTED BY YOU – DHA – 6 Packs",price:1980.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/tby-1.png",desc:"Six 90-day refill packs of DHA, totaling 18 months of supply. Best per-pack price on the line. Useful for households on long-term supplementation, gift sets, or practitioners who recommend the brand to clients.",details:{Format:"Bulk",Size:"6 × 90-day supply",Source:"Algae",Type:"DHA omega-3"}},
+  {id:24,name:"Peppermint Aromatherapy Packet 25 Count Box – 80 Pack",price:360.00,category:"health",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/Orlando_health-render-peppermint_ca22b483-bf2f-44a7-bd4d-8743be01276c-1.jpg",desc:"Single-use peppermint aromatherapy sachets, used clinically for nausea relief and post-operative comfort. Each box holds 25 packets; the case contains 80 boxes for a total of 2,000 sachets. Built for hospitals, clinics, and birth centers.",details:{Format:"Case",Size:"80 × 25 packets",Use:"Aromatherapy",Origin:"USA"}},
 
   // PANTRY & BULK
-  {id:25,name:"Havarti Dill Pickle – 2 Gallon Tin (32 cups)",price:54.99,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/2galtincopy_e4276c30-7dd6-4199-a39a-eddc4a068754-300x300.jpg",desc:"Havarti dill flavored popcorn in a 2-gallon tin. 32 cups of gourmet popcorn. Great for offices and events.",details:{Format:"Tin",Size:"2 gal / 32 cups",Origin:"USA",Flavor:"Havarti Dill Pickle"}},
-  {id:26,name:"Havarti Dill Pickle – 4 Gallon Bulk Box (64 cups)",price:80.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/bulk_pop_box_4e9e73a2-f0bc-4d6c-beda-e19d16357c9c-300x300.png",desc:"Havarti dill flavored popcorn in a bulk 4-gallon box. 64 cups. Best value for large gatherings.",details:{Format:"Bulk box",Size:"4 gal / 64 cups",Origin:"USA",Flavor:"Havarti Dill Pickle"}},
-  {id:27,name:"Blackened Bacon Cheddar – 4 Gallon Bulk Box (64 cups)",price:80.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/BlackenedBacon-2-300x300.png",desc:"Blackened bacon cheddar flavored popcorn. 4-gallon bulk box, 64 cups. Bold, savory, impossible to stop eating.",details:{Format:"Bulk box",Size:"4 gal / 64 cups",Origin:"USA",Flavor:"Blackened Bacon Cheddar"}},
-  {id:28,name:"Kettle Corn – 24-pack snack pack 1 oz",price:72.99,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/3OZ-BLUE-300x300.png",desc:"Classic sweet-and-salty kettle corn in 1oz single-serve snack packs. Case of 24. Ideal for offices and snack stations.",details:{Format:"Case",Size:"24 × 1 oz",Origin:"USA",Flavor:"Kettle Corn"}},
-  {id:29,name:"Organic Extra Virgin Avocado Oil – Everyday 375ml",price:68.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/20241110_Westbourne_101_39cfd4ae-88b0-41cc-a009-08d8f132c026-scaled-1-300x300.jpg",desc:"Cold-pressed organic avocado oil. Smoke point 500°F. Use for cooking, finishing, and dressings. 375ml bottle.",details:{Format:"Bottle",Size:"375 ml",Origin:"Organic",SmokePoint:"500°F"}},
-  {id:30,name:"The Natural Seaweed Soup – 1-Month Cure",price:185.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/imageedit_1_4079834593-300x300.jpg",desc:"Traditional Korean seaweed soup concentrate. 30-day supply. Used for postpartum recovery and immune support.",details:{Format:"Concentrate",Size:"30-day supply",Origin:"Korea",Use:"Daily soup base"}},
-  {id:31,name:"The Natural Seaweed Soup – 3-Month Recovery",price:545.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/imageedit_1_4079834593-1-300x300.jpg",desc:"3-month supply of traditional Korean seaweed soup concentrate. Best value for extended recovery and wellness programs.",details:{Format:"Concentrate",Size:"90-day supply",Origin:"Korea",Use:"Daily soup base"}},
+  {id:25,name:"Havarti Dill Pickle – 2 Gallon Tin (32 cups)",price:54.99,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/2galtincopy_e4276c30-7dd6-4199-a39a-eddc4a068754.jpg",desc:"Havarti and dill pickle flavored popcorn in a 2-gallon tin. Yields 32 cups, enough for an office of twenty to share twice over. The flavor is salty, tangy, slightly creamy. Tins keep the popcorn crisp longer than bag formats.",details:{Format:"Tin",Size:"2 gal / 32 cups",Origin:"USA",Flavor:"Havarti Dill Pickle"}},
+  {id:26,name:"Havarti Dill Pickle – 4 Gallon Bulk Box (64 cups)",price:80.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/bulk_pop_box_4e9e73a2-f0bc-4d6c-beda-e19d16357c9c.png",desc:"The 4-gallon bulk box version of the Havarti Dill Pickle popcorn, 64 cups total. Best per-cup value for parties, offices, or events. Same flavor as the tin, just in a less photogenic box format.",details:{Format:"Bulk box",Size:"4 gal / 64 cups",Origin:"USA",Flavor:"Havarti Dill Pickle"}},
+  {id:27,name:"Blackened Bacon Cheddar – 4 Gallon Bulk Box (64 cups)",price:80.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/BlackenedBacon-2.png",desc:"Bold, savory popcorn coated in a smoky bacon-cheddar blend. The blackening gives a slight charred edge that pulls it past standard cheese popcorn. 4-gallon bulk box, 64 cups. Disappears at parties faster than people expect.",details:{Format:"Bulk box",Size:"4 gal / 64 cups",Origin:"USA",Flavor:"Blackened Bacon Cheddar"}},
+  {id:28,name:"Kettle Corn – 24-pack snack pack 1 oz",price:72.99,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/3OZ-BLUE.png",desc:"Twenty-four 1oz single-serve packs of classic sweet-and-salty kettle corn. Sized for snack stations, office kitchens, and lunch packs where one-handed snacking matters. Around $3 per bag, comparable to grocery snack-aisle prices.",details:{Format:"Case",Size:"24 × 1 oz",Origin:"USA",Flavor:"Kettle Corn"}},
+  {id:29,name:"Organic Extra Virgin Avocado Oil – Everyday 375ml",price:68.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/20241110_Westbourne_101_39cfd4ae-88b0-41cc-a009-08d8f132c026-scaled-1.jpg",desc:"Cold-pressed organic avocado oil. The 500°F smoke point makes it the most versatile high-heat oil in the kitchen, where olive oil and coconut oil both have ceilings. Use for searing, roasting, baking, and finishing. 375ml lasts roughly six weeks under heavy daily use.",details:{Format:"Bottle",Size:"375 ml",Origin:"Organic",SmokePoint:"500°F"}},
+  {id:30,name:"The Natural Seaweed Soup – 1-Month Cure",price:185.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/imageedit_1_4079834593.jpg",desc:"Korean seaweed soup concentrate formulated to make 30 servings. Traditionally consumed postpartum and during recovery; high in iodine, calcium, and the gel-forming fibers in seaweed. Just add hot water plus beef or chicken. The concentrate keeps refrigerated for the full month.",details:{Format:"Concentrate",Size:"30-day supply",Origin:"Korea",Use:"Daily soup base"}},
+  {id:31,name:"The Natural Seaweed Soup – 3-Month Recovery",price:545.00,category:"pantry",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/06/imageedit_1_4079834593-1.jpg",desc:"Three-month supply of the same Korean seaweed soup concentrate. Used through extended recovery, lactation support, or households that have integrated the soup as a regular meal. Per-day cost works out to about $6, less than most takeout.",details:{Format:"Concentrate",Size:"90-day supply",Origin:"Korea",Use:"Daily soup base"}},
 
   // GIFT CARDS
-  {id:32,name:"For the Love of Grocery",priceFrom:20,priceTo:2000,denominations:[20,50,100,200,500,1000,2000],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/12/Grocery-300x300.png",desc:"Redeemable across the Gourmet Marketplace product catalogue. Available in amounts from $20 to $2,000.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$20–$2,000"}},
-  {id:33,name:"Kroger Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/03/Kroger-300x300.png",desc:"Accepted at all Kroger family stores including Kroger, Fred Meyer, King Soopers, and more. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
-  {id:34,name:"Safeway Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/03/Safeway-Gift-Card-300x300.png",desc:"Redeemable at all Safeway locations nationwide. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
-  {id:35,name:"Instacart Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/02/instacart-300x300.png",desc:"Shop from Whole Foods, Costco, Aldi, and 1,400+ retailers via Instacart delivery. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
-  {id:36,name:"Meijer Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2024/12/Meijer-Gift-Card-300x300.png",desc:"Accepted at all Meijer supercenters across the Midwest. Covers groceries, pharmacy, and general merchandise. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
-  {id:37,name:"Ralphs Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/02/Ralphs-Gift-Card-300x300.png",desc:"Redeemable at all Ralphs grocery stores in California. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
-  {id:38,name:"Albertsons Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/02/Albertsons-Gift-Card-300x300.png",desc:"Accepted at Albertsons, Vons, Pavilions, and affiliated stores. $10–$500.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}}
+  {id:32,name:"For the Love of Grocery",priceFrom:20,priceTo:2000,denominations:[20,50,100,200,500,1000,2000],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/12/Grocery.png",desc:"Redeemable across the Gourmet Marketplace catalogue, including hot sauce, coffee, supplements, popcorn, and the third-party grocery cards. No expiration, no fees. Delivered by email within 24 hours of purchase.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$20–$2,000"}},
+  {id:33,name:"Kroger Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/03/Kroger.png",desc:"Accepted at all Kroger family stores, including Kroger, Fred Meyer, King Soopers, Smith's, City Market, Dillons, Ralphs, and Mariano's. Use for groceries, pharmacy, fuel rewards, or in-store services. Codes never expire.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:34,name:"Safeway Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/03/Safeway-Gift-Card.png",desc:"Redeemable at every Safeway location nationwide. Covers groceries, prescriptions, deli, floral, and Starbucks counters where in-store. Delivered digitally, no expiration, combinable with Safeway loyalty rewards.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:35,name:"Instacart Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2026/02/instacart.png",desc:"Shop 1,400+ retailers via Instacart delivery, including Whole Foods, Costco, Aldi, Sam's Club, CVS, Sephora, and Petco. Use the balance for groceries, household, beauty, or pet supplies. Stacks with Instacart+ membership benefits.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:36,name:"Meijer Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2024/12/Meijer-Gift-Card.png",desc:"Accepted at all Meijer supercenters across the Midwest. Covers groceries, pharmacy, apparel, electronics, and home goods, since Meijer carries the non-grocery aisles too. Useful gift for households in MI, OH, IN, IL, KY, or WI.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:37,name:"Ralphs Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/02/Ralphs-Gift-Card.png",desc:"Redeemable at all Ralphs grocery stores throughout California. Covers full grocery, pharmacy, and Ralphs-branded fuel stations. Stackable with Ralphs Rewards. Most useful for SoCal households.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}},
+  {id:38,name:"Albertsons Gift Card",priceFrom:10,priceTo:500,denominations:[10,25,50,100,200,500],category:"giftcard",img:"https://gourmetmarketplace.co/wp-content/uploads/2025/02/Albertsons-Gift-Card.png",desc:"Accepted at Albertsons, Vons, Pavilions, and affiliated stores across the western US. Use for groceries, deli, pharmacy, and floral counters. Pairs with the chain's loyalty program for accumulated savings.",details:{Format:"Digital",Delivery:"Email",Expiration:"None",Range:"$10–$500"}}
 ];
 
 const CATEGORIES = [
@@ -980,41 +971,41 @@ const CATEGORIES = [
 ];
 
 const ARTICLES = [
-  {id:"a1",tag:"Guides",title:"What to Buy (and Skip) at Farmers Markets",date:"April 2025",img:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=900&h=540&fit=crop&q=80",excerpt:"Farmers markets offer fresh produce and local products — but not everything there is worth your money. Here's how to shop them well.",body:[
-    "The first rule of farmers markets is that not every stall is run by a farmer. Some are resellers buying wholesale and marking up. Once you can spot the difference — produce that's a little less perfect, signs that change with the season, sellers who can talk about their soil — your money goes to the right people.",
+  {id:"a1",tag:"Guides",title:"What to Buy (and Skip) at Farmers Markets",date:"April 2025",img:"https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=900&h=540&fit=crop&q=80",excerpt:"Farmers markets offer fresh produce and local products, but not everything there is worth your money. Here's how to shop them well.",body:[
+    "The first rule of farmers markets is that not every stall is run by a farmer. Some are resellers buying wholesale and marking up. Once you can spot the difference (produce that's a little less perfect, signage that changes with the season, sellers who can talk about their soil), your money goes to the right people.",
     "Stone fruit, tomatoes, leafy greens, eggs, and honey are almost always worth buying at the market. They're at peak quality, the prices are competitive once you factor out the supermarket's chilled-storage tax, and you'll taste the difference at home in a way that justifies the trip.",
     "Skip the things that don't have a quality story to tell: out-of-season fruit shipped in from elsewhere, packaged baked goods that have sat all morning, and condiments that exist mostly to look good on the table. A market vendor's hot sauce is usually a worse buy than a $15 bottle from a brand that ferments and tests its product.",
-    "If you're cooking for the week, build the trip around two or three things you actually plan to use, not a basket of beautiful things you'll forget about. Specialty markets like ours are designed to fill in the gaps — pantry staples, oils, salts, sauces — so the farmers market can stay focused on what it does best."
+    "If you're cooking for the week, build the trip around two or three things you actually plan to use, not a basket of beautiful things you'll forget about. Specialty markets like ours are designed to fill in the gaps: pantry staples, oils, salts, sauces. The farmers market gets to stay focused on what it does best."
   ]},
-  {id:"a2",tag:"Guides",title:"A Guide to International Hot Sauces",date:"March 2025",img:"https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=900&h=540&fit=crop&q=80",excerpt:"Hot sauce culture has exploded in the last decade. From Mexican salsas to Trinidadian scorpion pepper sauces — a guide to what's worth trying.",body:[
-    "Hot sauce went from a niche to a category of its own in about ten years. Now there are vinegar-based Louisiana sauces, fermented Mexican salsas, sweet-spicy Caribbean blends, and the extreme-heat sauces built around peppers like the Trinidad Moruga Scorpion. The label tells you what to expect — but only if you read it.",
+  {id:"a2",tag:"Guides",title:"A Guide to International Hot Sauces",date:"March 2025",img:"https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=900&h=540&fit=crop&q=80",excerpt:"Hot sauce culture has exploded in the last decade. From Mexican salsas to Trinidadian scorpion pepper sauces, here's a guide to what's worth trying.",body:[
+    "Hot sauce went from a niche to a category of its own in about ten years. Now there are vinegar-based Louisiana sauces, fermented Mexican salsas, sweet-spicy Caribbean blends, and the extreme-heat sauces built around peppers like the Trinidad Moruga Scorpion. The label tells you what to expect, but only if you read it.",
     "Look at the first three ingredients. If it leads with sugar or water, the heat will be diluted and the flavor will be flat. If it leads with peppers, vinegar, and a vegetable like onion or carrot, you're in good hands.",
-    "Heat level isn't the only spectrum. There's bright versus deep — a fresh jalapeño sauce is bright, a smoky chipotle sauce is deep. There's pure versus complex — a single-pepper sauce reads cleanly, a blend reads layered. Most kitchens benefit from one of each.",
-    "Our shelves carry Trejo's range, which spans mild jalapeño all the way through habanero and the scorpion-pepper extreme heat. The Hot Honey is the household crowd-pleaser — sweet enough for cheese boards, hot enough to register."
+    "Heat level isn't the only spectrum. There's bright versus deep: a fresh jalapeño sauce is bright, a smoky chipotle sauce is deep. There's pure versus complex: a single-pepper sauce reads cleanly, a blend reads layered. Most kitchens benefit from one of each.",
+    "Our shelves carry Trejo's range, which spans mild jalapeño all the way through habanero and the scorpion-pepper extreme heat. The Hot Honey is the household crowd-pleaser, sweet enough for cheese boards and hot enough to register."
   ]},
   {id:"a3",tag:"Tips",title:"How to Build a Specialty Pantry on a Budget",date:"February 2025",img:"https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&h=540&fit=crop&q=80",excerpt:"A well-stocked specialty pantry doesn't have to cost a fortune. These 10 items give you the most range for the least spend.",body:[
-    "A specialty pantry isn't a rich-person hobby — it's a way of cooking better food at home for less than the cost of takeout. The trick is buying the right ten things instead of fifty.",
+    "A specialty pantry isn't a rich-person hobby. It's a way of cooking better food at home for less than the cost of takeout. The trick is buying the right ten things instead of fifty.",
     "Start with one good oil, one good vinegar, one good salt, and one good chili. That's the four-corner foundation. From there, add one umami booster (anchovies, fish sauce, or miso), one acid you can drink (a tinned citrus juice, a ferment), and one sweet finishing element (good honey or hot honey).",
-    "Buy quantity in the things you use weekly: olive oil, salt, coffee. Buy small in the things you use monthly: a specialty vinegar, a hot sauce. The grocery-store impulse to buy big sizes everywhere is a trap — half of it goes stale.",
-    "If you do this and add one fresh shop a week — produce, eggs, dairy, bread — your weeknight cooking gets faster and better at the same time. The pantry does the heavy lifting of flavor; the fresh shop just provides the canvas."
+    "Buy quantity in the things you use weekly: olive oil, salt, coffee. Buy small in the things you use monthly: a specialty vinegar, a hot sauce. The grocery-store impulse to buy big sizes everywhere is a trap, since half of it goes stale.",
+    "If you do this and add one fresh shop a week for produce, eggs, dairy, and bread, your weeknight cooking gets faster and better at the same time. The pantry does the heavy lifting of flavor; the fresh shop just provides the canvas."
   ]},
   {id:"a4",tag:"Tips",title:"The Case for Buying Coffee in Bulk",date:"January 2025",img:"https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=900&h=540&fit=crop&q=80",excerpt:"Buying 2–5lb bags of good coffee saves money and tastes better than grocery store beans. Here's exactly why and what to buy.",body:[
     "The economics of coffee at scale are simple: a 12oz bag of supermarket coffee runs about $14. A 2lb bag of comparable specialty coffee runs about $42. Per ounce, the specialty is cheaper. Per cup, the specialty is much cheaper.",
-    "The other thing buying in bulk gets you is freshness. A 2lb bag in a sealed container, opened daily, lasts a heavy household 3–4 weeks — well within the window where the beans still taste like beans. Most supermarket coffee was roasted six weeks before it arrived on the shelf.",
+    "The other thing buying in bulk gets you is freshness. A 2lb bag in a sealed container, opened daily, lasts a heavy household 3 to 4 weeks, well within the window where the beans still taste like beans. Most supermarket coffee was roasted six weeks before it arrived on the shelf.",
     "If you don't drink that much, find a friend to split with. The bag is one decision; how you brew is the other. Coarse grind for French press, medium for drip, fine for moka pot. Buying pre-ground locks you into one method.",
-    "We carry Camila's Organic in 2lb coarse-ground bags for French press, and Mathilde's French Roast in 5lb medium-ground bags for drip — the second one is sized for offices but works at home for a heavy-coffee household."
+    "We carry Camila's Organic in 2lb coarse-ground bags for French press, and Mathilde's French Roast in 5lb medium-ground bags for drip. The second one is sized for offices but works at home for a heavy-coffee household."
   ]},
   {id:"a5",tag:"Deals",title:"Grocery Gift Cards: A Smarter Way to Shop",date:"December 2024",img:"https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&h=540&fit=crop&q=80",excerpt:"Using grocery store gift cards for everyday spending unlocks cashback and rewards that cash or credit card don't. We break down how it works.",body:[
     "Most people think of gift cards as gifts. But a grocery gift card bought through a marketplace can earn 4–6% cashback through credit-card category bonuses, then get spent at face value at the store. That's effectively a 4–6% discount on every grocery trip.",
     "The trick: many credit cards offer rotating bonus categories that include online retailers and gift card shops, but not the grocery store directly. Buying a Kroger or Safeway card online captures the bonus, then you spend the card normally.",
     "The math only works if you don't pay credit-card interest. Carry a balance and any rewards get wiped out by the interest rate. Pay in full each month and the savings are real.",
-    "Our shelves carry Kroger, Safeway, Albertsons, Ralphs, Meijer, and Instacart gift cards in $10–$500 denominations, plus our own Marketplace card for use on the site. Buy them like you'd buy groceries — in steady, predictable amounts."
+    "Our shelves carry Kroger, Safeway, Albertsons, Ralphs, Meijer, and Instacart gift cards in $10–$500 denominations, plus our own Marketplace card for use on the site. Buy them like you'd buy groceries: in steady, predictable amounts."
   ]},
   {id:"a6",tag:"Guides",title:"Energy Drinks in 2025: What's Actually Worth Drinking",date:"November 2024",img:"https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=900&h=540&fit=crop&q=80",excerpt:"The energy drink market has matured. Zero sugar, clean caffeine, and better flavors are the new standard. These are the ones that actually deliver.",body:[
-    "The first wave of energy drinks was sugar bombs with too much caffeine. The second wave was sugar-free but still tasted artificial. The third wave — which we're in now — is zero-sugar drinks that taste like real fruit, with caffeine levels that match what a strong coffee delivers.",
-    "Two hundred milligrams is the right daily ceiling for most adults. That's one Alani Nu or one 3D Energy. If you find yourself needing more than that, the problem isn't the caffeine — it's the sleep upstream of it.",
+    "The first wave of energy drinks was sugar bombs with too much caffeine. The second wave was sugar-free but still tasted artificial. The third wave, which we're in now, is zero-sugar drinks that taste like real fruit, with caffeine levels that match what a strong coffee delivers.",
+    "Two hundred milligrams is the right daily ceiling for most adults. That's one Alani Nu or one 3D Energy. If you find yourself needing more than that, the problem isn't the caffeine. It's the sleep upstream of it.",
     "Flavor is the differentiator now that the formulation question is mostly solved. Cherry limeade, pina colada, and the more interesting blends like the Mule's ginger-beer profile are where the category is going. The brand that wins this decade will be the one that can make a good drink without leaning on sweeteners.",
-    "If you buy by the case, the per-can price drops to about $2.40 — comparable to a coffee-shop coffee, but easier to grab from the fridge. Stock the office or the home gym."
+    "If you buy by the case, the per-can price drops to about $2.40, comparable to a coffee-shop coffee but easier to grab from the fridge. Stock the office or the home gym."
   ]}
 ];
 
@@ -1063,10 +1054,10 @@ function navigate(page,event,params){
   let routeStr = page;
   if(params && params.id){ routeStr = page+":"+params.id; }
   if(location.hash === "#"+routeStr){
-    // same hash — no hashchange will fire, render explicitly
+    // same hash, no hashchange will fire; render explicitly
     showPage(routeStr);
   } else {
-    // change hash — hashchange handler will call showPage
+    // change hash; hashchange handler will call showPage
     location.hash = routeStr;
   }
   // close mobile menu if open
@@ -1200,7 +1191,6 @@ function renderProduct(id){
         <img src="${p.img}" alt="${p.name}">
       </div>
       <div class="product-detail">
-        <div class="section-label">${categoryName(p.category)}</div>
         <h1>${p.name}</h1>
         <div class="product-price" id="prodPrice">${priceText}</div>
         ${denomHTML}
